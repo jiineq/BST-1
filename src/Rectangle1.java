@@ -46,15 +46,11 @@ public class Rectangle1 {
 	}
 	
 	// insert name x y w h
-	
 	// remove name
-	
 	// remove x y w h
 	// regionsearch x y w h
 	// intersections
 	// search name
 	// dump
-	
-	// hello world!
 
 }
