@@ -42,7 +42,10 @@ public class Rectangle1 {
 	 */
 	public static void main(String[] args) {
 		// invoked as java Rectangle1 {command-file}
-
+		// parse input file
+		// perform command 
+		// create and write to output file
+		
 	}
 	
 	// insert name x y w h
