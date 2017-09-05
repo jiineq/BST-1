@@ -1,4 +1,9 @@
 
+/**
+ * @author ianimp96
+ * @author nickeda
+ *
+ */
 public class Rectangle1 {
 
 	
@@ -25,6 +30,12 @@ public class Rectangle1 {
 	// Ian Imperial
 	// Nick Eda
 	
+	
+	
+	/**
+	 * @param args
+	 * 				the arguments entered
+	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
