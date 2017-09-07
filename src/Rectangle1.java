@@ -8,7 +8,7 @@ import java.util.Scanner;
 /**
  * @author ianimp96
  * @author nickeda
- * @version 09/04/17 (11:30 AM)
+ * @version 09/05/17 (11:30 AM)
  * 
  *          The Rectangle1 program reads and processes commands to handle a
  *          collection of rectangles in a database. The program allows the user
