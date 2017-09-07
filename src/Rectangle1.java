@@ -119,6 +119,7 @@ public class Rectangle1 {
 		Scanner insertScan = new Scanner(next);
 		while (insertScan.hasNext()) {
 			//System.out.println(insertScan.next());
+			//Create a new BST node
 		}
 	}
 
