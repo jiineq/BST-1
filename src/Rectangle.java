@@ -49,11 +49,12 @@ public class Rectangle implements Comparable<Rectangle> {
 		this.w = w;
 		this.h = h;
 	}
-	
+
 	public boolean isValid() {
 		return (h > 0 && w > 0 && x > 0 && y > 0 && x < 1024 && y < 1024);
 	}
 	
+
 	public String getName() {
 		return name;
 	}
@@ -79,7 +80,20 @@ public class Rectangle implements Comparable<Rectangle> {
 		return (getName().compareTo(rect2.getName()));
 	}
 
-	// intersect:
+	public boolean intersect(Rectangle other) {
+		if (other == null) return false;
+		
+		double x_Max1 = this.getX() + this.getWidth();
+		double x_Max2 = other.getX() + other.getWidth();
+		double y_Max1 = this.getY() + this.getHeight();
+		double y_Max2 = other.getX() + other.getHeight();
+		
+		double x_Distance = Math.max(0, Math.min(x_Max2, x_Max1) - Math.max(this.getX(), other.getX()));
+		double y_Distance = Math.max(0, Math.min(y_Max2, y_Max1) - Math.max(this.getY(), other.getY()));
+		
+		return (x_Distance > 0 && y_Distance > 0);
+		
+	}
 	// return true if the rectangles intersect
 
 }
