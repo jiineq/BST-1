@@ -162,7 +162,7 @@ public class BST<T extends Comparable<? super T>> {
 	 *            the current node being looked at
 	 * @return the root node of the altered tree
 	 */
-	private BinaryNode<T> insert(T element, BinaryNode<T> t) {
+	public BinaryNode<T> insert(T element, BinaryNode<T> t) {
 		// if the tree is empty, create a new tree
 		if (t == null) {
 			return new BinaryNode<T>(element, null, null);
@@ -267,6 +267,10 @@ public class BST<T extends Comparable<? super T>> {
 		} else {
 			return t.element;
 		}
+	}
+	
+	public BinaryNode<T> getRoot() {
+		return root;
 	}
 
 }

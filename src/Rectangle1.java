@@ -42,8 +42,9 @@ import java.util.Scanner;
 
 public class Rectangle1 {
 	
-	public static StringBuilder printString; // the data to print
-
+	private static StringBuilder printString; // the data to print
+	private static BST<Rectangle> tree; 
+	
 	/**
 	 * The main function will process the commands invoked on the program.
 	 * 
@@ -56,6 +57,7 @@ public class Rectangle1 {
 			File input = new File(args[0]);
 			File output = new File("Output.txt");
 			
+			tree = new BST<Rectangle>();
 			printString = new StringBuilder();
 			String currLine;
 			
@@ -68,7 +70,7 @@ public class Rectangle1 {
 				
 				// process the commands
 				while (scan.hasNext()) {
-					Commands commands = new Commands(scan.next());
+					Commands commands = new Commands(scan.next(), tree);
 				}
 				
 				// create and write to the output file
