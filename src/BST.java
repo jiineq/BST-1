@@ -78,33 +78,33 @@ public class BST<T extends Comparable<? super T>> {
 	/**
 	 * This function finds the minimum value in the tree.
 	 * 
-	 * @param t
+	 * @param root
 	 *            the current element being looked at
 	 * @return the minimum node in the tree
 	 */
-	private BinaryNode<T> findMin(BinaryNode<T> t) {
-		if (t == null) {
+	private BinaryNode<T> findMin(BinaryNode<T> root) {
+		if (root == null) {
 			return null;
-		} else if (t.left == null) {
-			return t;
+		} else if (root.left == null) {
+			return root;
 		}
-		return findMin(t.left);
+		return findMin(root.left);
 	}
 
 	/**
 	 * This function finds the maximum value in the tree.
 	 * 
-	 * @param t
+	 * @param root
 	 *            the current element being looked at
 	 * @return the maximum node in the tree
 	 */
-	private BinaryNode<T> findMax(BinaryNode<T> t) {
-		if (t == null) {
+	private BinaryNode<T> findMax(BinaryNode<T> root) {
+		if (root == null) {
 			return null;
-		} else if (t.right == null) {
-			return t;
+		} else if (root.right == null) {
+			return root;
 		}
-		return findMax(t.right);
+		return findMax(root.right);
 	}
 
 	/**
@@ -123,21 +123,21 @@ public class BST<T extends Comparable<? super T>> {
 	 * 
 	 * @param element
 	 *            the element we are searching for
-	 * @param t
+	 * @param root
 	 *            the current node being looked at
 	 * @return true if the value is in the tree, false otherwise
 	 */
-	private boolean contains(T element, BinaryNode<T> t) {
+	private boolean contains(T element, BinaryNode<T> root) {
 		// sanity check - base case
-		if (t == null) {
+		if (root == null) {
 			return false;
 		}
-		int compareResult = element.compareTo(t.element);
+		int compareResult = element.compareTo(root.element);
 
 		if (compareResult < 0) {
-			return contains(element, t.left);
+			return contains(element, root.left);
 		} else if (compareResult > 0) {
-			return contains(element, t.right);
+			return contains(element, root.right);
 		} else {
 			return true; // match
 		}
@@ -158,31 +158,31 @@ public class BST<T extends Comparable<? super T>> {
 	 * 
 	 * @param element
 	 *            the element to insert
-	 * @param t
+	 * @param root
 	 *            the current node being looked at
 	 * @return the root node of the altered tree
 	 */
-	public BinaryNode<T> insert(T element, BinaryNode<T> t) {
+	public BinaryNode<T> insert(T element, BinaryNode<T> root) {
 		// if the tree is empty, create a new tree
-		if (t == null) {
+		if (root == null) {
 			return new BinaryNode<T>(element, null, null);
 		}
 
-		int compareResult = element.compareTo(t.element);
+		int compareResult = element.compareTo(root.element);
 
 		// element goes to the left subtree
 		if (compareResult < 0) {
-			t.left = insert(element, t.left);
+			root.left = insert(element, root.left);
 		}
 		// element goes to the right subtree
 		else if (compareResult > 0) {
-			t.right = insert(element, t.right);
+			root.right = insert(element, root.right);
 		} else {
 			// duplicate insert
-			BinaryNode<T> successor = this.findMin(t.right);
-			successor.left = t;
+			BinaryNode<T> successor = this.findMin(root.right);
+			successor.left = root;
 		}
-		return t;
+		return root;
 	}
 
 	/**
@@ -200,34 +200,34 @@ public class BST<T extends Comparable<? super T>> {
 	 * 
 	 * @param element
 	 *            the element to be removed
-	 * @param t
+	 * @param root
 	 *            the current node being looked at
 	 * @return the root node of the altered tree
 	 */
-	private BinaryNode<T> remove(T element, BinaryNode<T> t) {
-		if (t == null) {
-			return t;
+	private BinaryNode<T> remove(T element, BinaryNode<T> root) {
+		if (root == null) {
+			return root;
 		}
 
-		int compareResult = element.compareTo(t.element);
+		int compareResult = element.compareTo(root.element);
 
 		// search the left subtree
 		if (compareResult < 0) {
-			t.left = remove(element, t.left);
+			root.left = remove(element, root.left);
 		}
 		// search the right subtree
 		else if (compareResult > 0) {
-			t.right = remove(element, t.right);
+			root.right = remove(element, root.right);
 		}
 		// found the item to delete,determine 1 or 2 children
-		else if (t.left != null && t.right != null) {
-			t.element = findMin(t.right).element;
-			t.right = remove(t.element, t.right);
+		else if (root.left != null && root.right != null) {
+			root.element = findMin(root.right).element;
+			root.right = remove(root.element, root.right);
 		} else {
-			t = (t.left != null) ? t.left : t.right;
+			root = (root.left != null) ? root.left : root.right;
 
 		}
-		return t;
+		return root;
 	}
 
 	/**
@@ -249,28 +249,57 @@ public class BST<T extends Comparable<? super T>> {
 	 * 
 	 * @param x
 	 *            the element to search for
-	 * @param t
+	 * @param root
 	 *            the current node being looked at
 	 * @return the element searched for
 	 */
-	private T find(T x, BinaryNode<T> t) {
-		if (t == null) {
+	private T find(T x, BinaryNode<T> root) {
+		if (root == null) {
 			return null;
 		}
 
-		int compareResult = x.compareTo(t.element);
+		int compareResult = x.compareTo(root.element);
 
 		if (compareResult < 0) {
-			return find(x, t.left);
+			return find(x, root.left);
 		} else if (compareResult > 0) {
-			return find(x, t.right);
+			return find(x, root.right);
 		} else {
-			return t.element;
+			return root.element;
 		}
 	}
-	
+
+	/**
+	 * Getter for the root
+	 * 
+	 * @return the root of the tree
+	 */
 	public BinaryNode<T> getRoot() {
 		return root;
+	}
+
+	/**
+	 * Prints the contents of the tree via inorder traversal
+	 */
+	public void printTree() {
+		printTree(root);
+	}
+
+	/**
+	 * Prints the contents of the tree recursively (inorder)
+	 * 
+	 * @param root
+	 *            the root of the tree
+	 */
+	public void printTree(BinaryNode<T> root) {
+		if (root == null) {
+			System.out.println("");
+		}
+		if (root != null) {
+			printTree(root.left);
+			System.out.println(root.element);
+			printTree(root.right);
+		}
 	}
 
 }

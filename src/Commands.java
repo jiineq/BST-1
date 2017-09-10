@@ -145,12 +145,12 @@ public class Commands extends Rectangle1 {
 
 	/**
 	 * Prints out each node of the BST's value and number of pointers it contains
-	 * via in-order traversal.
+	 * via inorder traversal.
 	 * 
 	 * @param next
 	 *            the current line being processed
 	 */
 	private static void processDump(String next, BST<Rectangle> tree) {
-
+		tree.printTree();
 	}
 }
