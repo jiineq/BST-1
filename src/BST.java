@@ -162,7 +162,7 @@ public class BST<T extends Comparable<? super T>> {
 	 *            the current node being looked at
 	 * @return the root node of the altered tree
 	 */
-	public BinaryNode<T> insert(T element, BinaryNode<T> root) {
+	private BinaryNode<T> insert(T element, BinaryNode<T> root) {
 		// if the tree is empty, create a new tree
 		if (root == null) {
 			return new BinaryNode<T>(element, null, null);
@@ -238,6 +238,9 @@ public class BST<T extends Comparable<? super T>> {
 	 * @return the element searched for
 	 */
 	public T find(T x) {
+		if (x == null) {
+			return null;
+		}
 		return find(x, root);
 	}
 
@@ -291,11 +294,10 @@ public class BST<T extends Comparable<? super T>> {
 	 * @param root
 	 *            the root of the tree
 	 */
-	public void printTree(BinaryNode<T> root) {
+	private void printTree(BinaryNode<T> root) {
 		if (root == null) {
 			System.out.println("");
-		}
-		if (root != null) {
+		} else {
 			printTree(root.left);
 			System.out.println(root.element);
 			printTree(root.right);

@@ -1,0 +1,9 @@
+insert rectangle1 0 0 50 50
+insert rectangle2 50 50 50 50
+insert rectangle3 100 101 102 103
+
+remove rectangle1
+remove 100 101 102 103
+remove nonexistentRectangle
+remove 99 90 95 94
+search rectangle1

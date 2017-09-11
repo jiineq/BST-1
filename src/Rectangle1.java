@@ -3,6 +3,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -44,6 +45,7 @@ public class Rectangle1 {
 	
 	private static StringBuilder printString; // the data to print
 	private static BST<Rectangle> tree; 
+	private static ArrayList<Rectangle> rectangleList;
 	
 	/**
 	 * The main function will process the commands invoked on the program.
@@ -59,7 +61,7 @@ public class Rectangle1 {
 			
 			tree = new BST<Rectangle>();
 			printString = new StringBuilder();
-			String currLine;
+			rectangleList = new ArrayList<Rectangle>();
 			
 			try {
 				FileReader inputReader = new FileReader(input);
@@ -70,12 +72,13 @@ public class Rectangle1 {
 				
 				// process the commands
 				while (scan.hasNext()) {
-					Commands commands = new Commands(scan.next(), tree);
+					Commands commands = new Commands(scan.next(), tree, rectangleList);
 				}
 				
 				// create and write to the output file
 				Output outputTextFile = new Output(outputFile, printString.toString());
-
+				
+				scan.close();
 			} catch (FileNotFoundException e) {
 				e.printStackTrace();
 				System.err.println("The file was not found.");

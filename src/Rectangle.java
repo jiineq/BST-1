@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 
 /**
  * The Rectangle class will handle the features of the Rectangles that will be added 
@@ -62,7 +61,7 @@ public class Rectangle implements Comparable<Rectangle> {
 	 * @return true if the Rectangle is valid, false otherwise
 	 */
 	public boolean isValid() {
-		return (h > 0 && w > 0 && x > 0 && y > 0 && x < 1024 && y < 1024);
+		return (h > 0 && w > 0 && x >= 0 && y >= 0 && x <= 1024 && y <= 1024);
 	}
 
 	/**
