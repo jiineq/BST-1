@@ -302,4 +302,30 @@ public class BST<T extends Comparable<? super T>> {
 		}
 	}
 
+	/**
+	 * Find method that takes and returns a String object
+	 * 
+	 * @param next
+	 *            the String name of the element to search for
+	 * @param root
+	 *            the current node being looked at
+	 * @return the String of the element being search for
+	 */
+	public String find(String name, BinaryNode<T> root) {
+		if (root == null) {
+			return "";
+		}
+
+		int compareResult = name.compareTo(root.element.toString());
+
+		if (compareResult < 0) {
+			return find(name, root.left);
+		} else if (compareResult > 0) {
+			return find(name, root.right);
+		} else {
+			return root.element.toString();
+		}
+
+	}
+
 }

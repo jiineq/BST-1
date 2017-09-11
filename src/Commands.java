@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -11,7 +12,9 @@ import java.util.Scanner;
  *
  */
 public class Commands extends Rectangle1 {
-	
+
+	private static ArrayList<Rectangle> rectangleList;
+
 	/**
 	 * Empty constructor
 	 */
@@ -20,7 +23,7 @@ public class Commands extends Rectangle1 {
 	}
 
 	/**
-	 * Constructor of the Commands file. 
+	 * Constructor of the Commands file.
 	 * 
 	 * @param command
 	 *            the current line to be parsed from the input file
@@ -53,7 +56,7 @@ public class Commands extends Rectangle1 {
 			// do nothing, process next line
 		}
 	}
-	
+
 	/**
 	 * This function will insert a rectangle of the given name into the specified
 	 * coordinates.
@@ -63,25 +66,26 @@ public class Commands extends Rectangle1 {
 	 */
 	private static void processInsert(String next, BST<Rectangle> tree) {
 		Scanner insertScan = new Scanner(next);
-		while (insertScan.hasNext()) {
-//			System.out.println(insertScan.next());
-			insertScan.next();
-			String name = insertScan.next();
-			String xString = insertScan.next();
-			int x = Integer.parseInt(xString);
-			String yString = insertScan.next();
-			int y = Integer.parseInt(yString);
-			String wString = insertScan.next();
-			int w = Integer.parseInt(wString);
-			String hString = insertScan.next();
-			int h = Integer.parseInt(hString);
+		insertScan.next(); // skips the token that has the word insert
+		String name = insertScan.next();
+		String xString = insertScan.next();
+		int x = Integer.parseInt(xString);
+		String yString = insertScan.next();
+		int y = Integer.parseInt(yString);
+		String wString = insertScan.next();
+		int w = Integer.parseInt(wString);
+		String hString = insertScan.next();
+		int h = Integer.parseInt(hString);
 
-			Rectangle rect = new Rectangle(name, x, y, w, h);
-			if (rect.isValid()) {
-				tree.insert(rect, tree.getRoot());
-			}
-			
+		Rectangle rect = new Rectangle(name, x, y, w, h);
+		if (rect.isValid()) {
+			tree.insert(rect, tree.getRoot());
+			rectangleList.add(rect);
+		} else {
+			System.out.println("Rectangle rejected: " + "(" + name + ", " + xString + ", " + yString + ", " + wString
+					+ ", " + hString + ")");
 		}
+
 	}
 
 	/**
@@ -96,9 +100,16 @@ public class Commands extends Rectangle1 {
 	 */
 	private static void processRemove(String next, BST<Rectangle> tree) {
 		Scanner removeScan = new Scanner(next);
-		while (removeScan.hasNext()) {
-			// Need to differentiate between name and x y w h
+		removeScan.next(); // skips the token that has the word remove
+
+		// if the scanner hasNext() then remove by coordinates
+		if (removeScan.hasNext()) {
+
+		} else { // remove by name
+
 		}
+
+		// Need to differentiate between name and x y w h
 
 	}
 
@@ -113,9 +124,6 @@ public class Commands extends Rectangle1 {
 	 */
 	private static void processRegionSearch(String next, BST<Rectangle> tree) {
 		Scanner regionScan = new Scanner(next);
-		while (regionScan.hasNext()) {
-
-		}
 	}
 
 	/**
@@ -125,7 +133,7 @@ public class Commands extends Rectangle1 {
 	 *            the current line being processed
 	 */
 	private static void processIntersections(String next, BST<Rectangle> tree) {
-
+		System.out.println("Intersection pairs: ");
 	}
 
 	/**
@@ -137,8 +145,17 @@ public class Commands extends Rectangle1 {
 	 */
 	private static void processSearch(String next, BST<Rectangle> tree) {
 		Scanner searchScan = new Scanner(next);
-		while (searchScan.hasNext()) {
+		searchScan.next(); // skips over the token that has the word search
+		String name = searchScan.next();
+		Rectangle result = tree.find(findRect(name));
+		// String result = tree.find(name, tree.getRoot());
 
+		// prints the results of the search
+		if (result.getName().equals("")) {
+			System.out.println("Rectangle not found: " + name);
+		} else {
+			System.out.println("Rectangle found: (" + name + ", " + result.getX() + ", " + result.getY() + ", "
+					+ result.getWidth() + ", " + result.getHeight() + ")");
 		}
 
 	}
@@ -152,5 +169,21 @@ public class Commands extends Rectangle1 {
 	 */
 	private static void processDump(String next, BST<Rectangle> tree) {
 		tree.printTree();
+	}
+
+	/**
+	 * Searches for a rectangle object in the rectangleList by name
+	 * 
+	 * @param name
+	 *            the name of the rectangle being searched for
+	 * @return the Rectangle object being looked for, or null if it is not found
+	 */
+	private static Rectangle findRect(String name) {
+		for (int i = 0; i < rectangleList.size(); i++) {
+			if (name.equals(rectangleList.get(i).getName())) {
+				return rectangleList.get(i);
+			}
+		}
+		return null;
 	}
 }
