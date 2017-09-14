@@ -14,6 +14,7 @@ remove nonexistentRectangle
 remove 99 90 95 94
 
 search rectangle1
+search rectangle2
 
 regionsearch 10 10 50 50
 regionsearch 10 10 0 50

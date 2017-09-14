@@ -1,0 +1,12 @@
+Rectangle accepted:(r1, 0, 0, 3, 4)
+Rectangle accepted:(r2, 5, 0, 5, 3)
+Rectangle accepted:(r3, 1000, 4, 20, 300)
+Rectangle rejected: (4, 6, 0, 10)
+Rectangles intersecting region (2, 2, 4, 3):
+(r1, 0, 0, 3, 4)
+(r2, 5, 0, 5, 3)
+Rectangles intersecting region (-3, 2, 7, 5):
+(r1, 0, 0, 3, 4)
+Rectangles intersecting region (1019, 5, 75, 20):
+(r3, 1000, 4, 20, 300)
+Rectangles intersecting region (0, 20, 4, 6):

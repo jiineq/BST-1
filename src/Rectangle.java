@@ -118,7 +118,8 @@ public class Rectangle implements Comparable<Rectangle> {
 	 * Checks to see which rectangles intersect one another.
 	 * 
 	 * @param other
-	 * @return
+	 *            the rectangle to check for intersection with
+	 * @return true if rectangles intersect, false otherwise
 	 */
 	public boolean intersect(Rectangle other) {
 		if (other == null)
@@ -135,6 +136,5 @@ public class Rectangle implements Comparable<Rectangle> {
 		return (x_Distance > 0 && y_Distance > 0);
 
 	}
-	// return true if the rectangles intersect
 
 }

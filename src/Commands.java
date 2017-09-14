@@ -77,12 +77,14 @@ public class Commands extends Rectangle1 {
 		String hString = insertScan.next();
 		int h = Integer.parseInt(hString);
 
+		insertScan.close();
+
 		// create a new rectangle and add it to the tree and ArrayList
 		Rectangle rect = new Rectangle(name, x, y, w, h);
 		if (rect.isValid()) {
 			tree.insert(rect);
 			arr.add(rect);
-			System.out.println("Rectangle inserted: (" + name + ", " + rect.getX() + ", " + rect.getY() + ", "
+			System.out.println("Rectangle accepted: (" + name + ", " + rect.getX() + ", " + rect.getY() + ", "
 					+ rect.getWidth() + ", " + rect.getHeight() + ")");
 		} else { // reject an invalid Rectangle
 			System.out.println("Rectangle rejected: " + "(" + name + ", " + xString + ", " + yString + ", " + wString
@@ -117,6 +119,8 @@ public class Commands extends Rectangle1 {
 			int w = Integer.parseInt(wString);
 			String hString = removeScan.next();
 			int h = Integer.parseInt(hString);
+
+			removeScan.close();
 
 			// see if the coordinate pairs are in the tree
 			Rectangle result = checkCoordinates(x, y, w, h, arr);
@@ -191,32 +195,33 @@ public class Commands extends Rectangle1 {
 	private static boolean processRegionSearch(String next, BST<Rectangle> tree, ArrayList<Rectangle> arr) {
 		Scanner regionScan = new Scanner(next);
 		regionScan.next(); // skips over the token that has the word regionsearch
-		
+
 		// get all of the coordinate values in int form
 		int x = Integer.parseInt(regionScan.next());
 		int y = Integer.parseInt(regionScan.next());
 		int w = Integer.parseInt(regionScan.next());
 		int h = Integer.parseInt(regionScan.next());
-		
+
 		regionScan.close();
-		
+
 		if (w <= 0 || h <= 0) {
-			System.out.println("The given region is not valid.");
+			System.out.println("Rectangle rejected: " + "(" + x + ", " + y + ", " + w + ", " + h + ")");
 			return false;
 		}
-		
+
 		// treat the region being searched as a "ghost" rectangle.
 		Rectangle region = new Rectangle("Region", x, y, w, h);
-		
+
+		System.out.println("Rectangles intersecting region " + "(" + x + ", " + y + ", " + w + ", " + h + "):");
+
 		boolean found = false;
 		for (Rectangle rect : arr) {
 			if (region.intersect(rect)) {
-				if (!found)
-				{
-					System.out.println("The following rectangle(s) are located within the bounding region search: ");
+				if (!found) {
 					found = true;
 				}
-				System.out.println(rect.getName() + " located at (" + rect.getX() + ", " + rect.getY() + ")");
+				System.out.println("(" + rect.getName() + ", " + rect.getX() + ", " + rect.getY() + ", "
+						+ rect.getWidth() + ", " + rect.getHeight() + ")");
 			}
 		}
 		return found;
@@ -243,6 +248,9 @@ public class Commands extends Rectangle1 {
 		Scanner searchScan = new Scanner(next);
 		searchScan.next(); // skips over the token that has the word search
 		String name = searchScan.next();
+
+		searchScan.close();
+
 		Rectangle result = tree.find(findRect(name, arr));
 
 		// prints the results of the search
@@ -263,7 +271,22 @@ public class Commands extends Rectangle1 {
 	 *            the current line being processed
 	 */
 	private static void processDump(String next, BST<Rectangle> tree, ArrayList<Rectangle> arr) {
-		tree.printTree();
+		System.out.println("BST Dump:");
+		tree.inorder_iterator();
+
+		if (tree.getRoot() == null) {
+			System.out.println("Node has depth 0, Value (" + tree.getRoot() + ")");
+		} else {
+			for (int i = 0; i < tree.getStack().size(); i++) {
+				System.out.println("Node has depth " + tree.getDepth(tree.getStack().elementAt(i).element, tree.getRoot())
+						+ ", Value (" + tree.getStack().elementAt(i).element.getName() + ", "
+						+ tree.getStack().elementAt(i).element.getX() + ", "
+						+ tree.getStack().elementAt(i).element.getY() + ", "
+						+ tree.getStack().elementAt(i).element.getWidth() + ", "
+						+ tree.getStack().elementAt(i).element.getHeight() + ")");
+			}
+			System.out.println("BST size is: " + tree.getStack().size());
+		}
 	}
 
 	/**

@@ -1,3 +1,6 @@
+import java.util.Iterator;
+import java.util.Stack;
+
 /**
  * @author ianimp96
  * @author nickeda
@@ -8,7 +11,7 @@
  * 
  *
  */
-public class BST<T extends Comparable<? super T>> {
+public class BST<T extends Comparable<? super T>> implements Iterator<T> {
 
 	/**
 	 * Creates a basic node to be used in the Binary Search Tree.
@@ -16,7 +19,7 @@ public class BST<T extends Comparable<? super T>> {
 	 * @param <T>
 	 *            The type of data element contained in the node.
 	 */
-	private static class BinaryNode<T> {
+	static class BinaryNode<T> {
 
 		T element; // the data in the node
 		BinaryNode<T> left; // the left child
@@ -29,6 +32,7 @@ public class BST<T extends Comparable<? super T>> {
 		 * @param elem
 		 *            the element to store in this node.
 		 */
+		@SuppressWarnings("unused")
 		BinaryNode(T elem) {
 			this(elem, null, null);
 		}
@@ -51,6 +55,7 @@ public class BST<T extends Comparable<? super T>> {
 	}
 
 	private BinaryNode<T> root;
+	private Stack<BinaryNode<T>> nodeStack;
 
 	/**
 	 * Constructs an empty tree.
@@ -98,6 +103,7 @@ public class BST<T extends Comparable<? super T>> {
 	 *            the current element being looked at
 	 * @return the maximum node in the tree
 	 */
+	@SuppressWarnings("unused")
 	private BinaryNode<T> findMax(BinaryNode<T> root) {
 		if (root == null) {
 			return null;
@@ -273,35 +279,53 @@ public class BST<T extends Comparable<? super T>> {
 	}
 
 	/**
+	 * Function to acquire the depth of a specific element.
+	 * 
+	 * @param binaryNode
+	 *            the element whose depth we are looking for
+	 * @param root
+	 *            the root of the tree
+	 * @return the depth of the specified element
+	 */
+	public int getDepth(T binaryNode, BinaryNode<T> root) {
+		return getDepthHelper(binaryNode, root, 0);
+	}
+
+	/**
+	 * Helper function for getDepth
+	 * 
+	 * @param binaryNode
+	 *            the element whose depth we are looking for
+	 * @param root
+	 *            the current node we are visiting
+	 * @param depth
+	 *            the current depth of the node we are visiting
+	 * @return the depth of the element
+	 */
+	private int getDepthHelper(T binaryNode, BinaryNode<T> root, int depth) {
+		if (root == null) {
+			return 0;
+		}
+		if (root.element == binaryNode) {
+			return depth;
+		}
+
+		int down = getDepthHelper(binaryNode, root.left, depth + 1);
+		if (down != 0) {
+			return down;
+		} else {
+			down = getDepthHelper(binaryNode, root.right, depth + 1);
+			return down;
+		}
+	}
+
+	/**
 	 * Getter for the root
 	 * 
 	 * @return the root of the tree
 	 */
 	public BinaryNode<T> getRoot() {
 		return root;
-	}
-
-	/**
-	 * Prints the contents of the tree via inorder traversal
-	 */
-	public void printTree() {
-		printTree(root);
-	}
-
-	/**
-	 * Prints the contents of the tree recursively (inorder)
-	 * 
-	 * @param root
-	 *            the root of the tree
-	 */
-	private void printTree(BinaryNode<T> root) {
-		if (root == null) {
-			System.out.println("");
-		} else {
-			printTree(root.left);
-			System.out.println(root.element);
-			printTree(root.right);
-		}
 	}
 
 	/**
@@ -328,6 +352,83 @@ public class BST<T extends Comparable<? super T>> {
 			return root.element.toString();
 		}
 
+	}
+
+	@Override
+	public boolean hasNext() {
+		return (next() != null);
+	}
+
+	@Override
+	public T next() {
+		if (nodeStack.isEmpty()) {
+			return null;
+		} else {
+			BinaryNode<T> curr = nodeStack.pop();
+
+			if (curr.right != null) {
+				goLeftFrom(curr.right);
+			}
+			return curr.element;
+		}
+
+	}
+
+	/**
+	 * In-order iterator that will create a stack of nodes in the BST.
+	 */
+	public void inorder_iterator() {
+		if (root != null) {
+			// properly positions first node
+			nodeStack = new Stack<BinaryNode<T>>();
+			goLeftFrom(root);
+
+			BinaryNode<T> curr = nodeStack.peek();
+
+			if (curr.right != null) {
+				goLeftFrom(curr.right);
+				nodeStack.pop();
+				goRightFrom(curr.right);
+			}
+		}
+	}
+
+	/**
+	 * Helper function to push nodes along the right branch, starting from the root
+	 * until we reach a node with no left child.
+	 * 
+	 * @param t
+	 *            the current node of the tree to be pushed
+	 */
+	private void goRightFrom(BinaryNode<T> t) {
+		while (t != null) {
+			nodeStack.push(t);
+			t = t.right;
+		}
+
+	}
+
+	/**
+	 * Helper function to push nodes along the leftmost branch, starting from the
+	 * root until we reach a node with no left child.
+	 * 
+	 * @param t
+	 *            the current node of the tree to be pushed
+	 */
+	private void goLeftFrom(BinaryNode<T> t) {
+		while (t != null) {
+			nodeStack.push(t);
+			t = t.left;
+		}
+	}
+
+	/**
+	 * Getter for the node stack
+	 * 
+	 * @return the node stack
+	 */
+	public Stack<BinaryNode<T>> getStack() {
+		return nodeStack;
 	}
 
 }
