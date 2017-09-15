@@ -1,5 +1,7 @@
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.Stack;
+
 
 /**
  * The Commands class will read, process, and parse the commands from the input file.
@@ -84,11 +86,9 @@ public class Commands extends Rectangle1 {
 		if (rect.isValid()) {
 			tree.insert(rect);
 			arr.add(rect);
-			System.out.println("Rectangle accepted: (" + name + ", " + rect.getX() + ", " + rect.getY() + ", "
-					+ rect.getWidth() + ", " + rect.getHeight() + ")");
+			System.out.println("Rectangle accepted: " + rect.toString());
 		} else { // reject an invalid Rectangle
-			System.out.println("Rectangle rejected: " + "(" + name + ", " + xString + ", " + yString + ", " + wString
-					+ ", " + hString + ")");
+			System.out.println("Rectangle rejected: " + rect.toString());
 		}
 
 	}
@@ -131,8 +131,7 @@ public class Commands extends Rectangle1 {
 			} else { // remove the rectangle if it is in the tree
 				tree.remove(result);
 				arr.remove(result);
-				System.out.println("Rectangle removed: (" + tok + ", " + result.getX() + ", " + result.getY() + ", "
-						+ +result.getWidth() + ", " + result.getHeight() + ")");
+				System.out.println("Rectangle removed: " + result.toString());
 			}
 
 		} else { // remove by name
@@ -144,8 +143,7 @@ public class Commands extends Rectangle1 {
 			} else { // remove the rectangle if it is in the tree
 				tree.remove(result);
 				arr.remove(result);
-				System.out.println("Rectangle removed: (" + tok + ", " + result.getX() + ", " + result.getY() + ", "
-						+ +result.getWidth() + ", " + result.getHeight() + ")");
+				System.out.println("Rectangle removed: " + result.toString());
 			}
 
 		}
@@ -220,8 +218,7 @@ public class Commands extends Rectangle1 {
 				if (!found) {
 					found = true;
 				}
-				System.out.println("(" + rect.getName() + ", " + rect.getX() + ", " + rect.getY() + ", "
-						+ rect.getWidth() + ", " + rect.getHeight() + ")");
+				System.out.println(rect.toString());
 			}
 		}
 		return found;
@@ -235,6 +232,16 @@ public class Commands extends Rectangle1 {
 	 */
 	private static void processIntersections(String next, BST<Rectangle> tree, ArrayList<Rectangle> arr) {
 		System.out.println("Intersection pairs: ");
+		tree.inorder_iterator();
+		while (tree.hasNext()) {
+			Rectangle rect = tree.next();
+			for (int i = tree.getStack().size() - 1; i >=0 ; i--) {
+				Rectangle rectOuter = tree.getStack().elementAt(i).element;
+				if (rect.intersect(rectOuter)) {
+					System.out.println(rect.toString() + " - " + rectOuter.toString());
+				}
+			}
+		}
 	}
 
 	/**
@@ -257,8 +264,7 @@ public class Commands extends Rectangle1 {
 		if (result == null || result.getName().equals("")) {
 			System.out.println("Rectangle not found: " + name);
 		} else {
-			System.out.println("Rectangle found: (" + name + ", " + result.getX() + ", " + result.getY() + ", "
-					+ result.getWidth() + ", " + result.getHeight() + ")");
+			System.out.println("Rectangle found: " + result.toString());
 		}
 
 	}
