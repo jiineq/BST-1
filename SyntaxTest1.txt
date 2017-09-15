@@ -1,18 +1,15 @@
 insert rectangle1 0 0 50 50
-
 insert rectangle2 50 50 50 50
-
 insert rectangle3 100 101 102 103
-
-
-
+insert rectangle4 2 2 500 500
+insert rectangle5 1 1 450 400
+insert rectangle6 460 460 10 10
 remove rectangle1
-
 remove 100 101 102 103
 remove nonexistentRectangle
 
 remove 99 90 95 94
-
+ dump 
 search rectangle1
 search rectangle2
 
@@ -21,3 +18,4 @@ regionsearch 10 10 0 50
 regionsearch 10 10 50 0
 regionsearch 10 10 0 0
 
+intersections
