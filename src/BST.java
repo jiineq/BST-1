@@ -356,7 +356,13 @@ public class BST<T extends Comparable<? super T>> implements Iterator<T> {
 
 	@Override
 	public boolean hasNext() {
-		return (next() != null);
+		if (nodeStack == null) {
+			return false;
+		}
+		if (nodeStack.isEmpty()) {
+			return false;
+		}
+		return (nodeStack.peek() != null);
 	}
 
 	@Override
@@ -365,10 +371,6 @@ public class BST<T extends Comparable<? super T>> implements Iterator<T> {
 			return null;
 		} else {
 			BinaryNode<T> curr = nodeStack.pop();
-
-			if (curr.right != null) {
-				goLeftFrom(curr.right);
-			}
 			return curr.element;
 		}
 
