@@ -136,5 +136,17 @@ public class Rectangle implements Comparable<Rectangle> {
 		return (x_Distance > 0 && y_Distance > 0);
 
 	}
+	
+	/**
+	 * Prints the rectangles name, coordinates, and dimensions
+	 * 
+	 * @return A string of format ("name, x, y, w, h")
+	 */
+	@Override
+	public String toString() {
+		return "(" + this.getName() + ", " + this.getX() + ", " + this.getY() + ", " + this.getWidth()
+		+	", " + this.getHeight() + ")";
+	}
+	
 
 }
