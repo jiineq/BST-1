@@ -1,7 +1,7 @@
 
 /**
- * The Rectangle class will handle the features of the Rectangles that will be added 
- * to the BST. 
+ * The Rectangle class will handle the features of the Rectangles that will be
+ * added to the BST.
  */
 
 /**
@@ -52,11 +52,11 @@ public class Rectangle implements Comparable<Rectangle> {
 	}
 
 	/**
-	 * Checks to see if the Rectangle is valid by checking if it meets the following
-	 * conditions:
+	 * Checks to see if the Rectangle is valid by checking if it meets the
+	 * following conditions:
 	 * 
-	 * 1. The height and width are not greater than 0. 2. The rectangle is within
-	 * the 1024 x 1024 world box
+	 * 1. The height and width are not greater than 0. 2. The rectangle is
+	 * within the 1024 x 1024 world box
 	 * 
 	 * @return true if the Rectangle is valid, false otherwise
 	 */
@@ -122,21 +122,24 @@ public class Rectangle implements Comparable<Rectangle> {
 	 * @return true if rectangles intersect, false otherwise
 	 */
 	public boolean intersect(Rectangle other) {
-		if (other == null)
+		if (other == null) {
 			return false;
+		}
 
-		double x_Max1 = this.getX() + this.getWidth();
-		double x_Max2 = other.getX() + other.getWidth();
-		double y_Max1 = this.getY() + this.getHeight();
-		double y_Max2 = other.getX() + other.getHeight();
+		double xMax1 = this.getX() + this.getWidth();
+		double xMax2 = other.getX() + other.getWidth();
+		double yMax1 = this.getY() + this.getHeight();
+		double yMax2 = other.getX() + other.getHeight();
 
-		double x_Distance = Math.max(0, Math.min(x_Max2, x_Max1) - Math.max(this.getX(), other.getX()));
-		double y_Distance = Math.max(0, Math.min(y_Max2, y_Max1) - Math.max(this.getY(), other.getY()));
+		double xDistance = Math.max(0,
+				Math.min(xMax2, xMax1) - Math.max(this.getX(), other.getX()));
+		double yDistance = Math.max(0,
+				Math.min(yMax2, yMax1) - Math.max(this.getY(), other.getY()));
 
-		return (x_Distance > 0 && y_Distance > 0);
+		return (xDistance > 0 && yDistance > 0);
 
 	}
-	
+
 	/**
 	 * Prints the rectangles name, coordinates, and dimensions
 	 * 
@@ -144,9 +147,8 @@ public class Rectangle implements Comparable<Rectangle> {
 	 */
 	@Override
 	public String toString() {
-		return "(" + this.getName() + ", " + this.getX() + ", " + this.getY() + ", " + this.getWidth()
-		+	", " + this.getHeight() + ")";
+		return "(" + this.getName() + ", " + this.getX() + ", " + this.getY()
+				+ ", " + this.getWidth() + ", " + this.getHeight() + ")";
 	}
-	
 
 }
