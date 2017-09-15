@@ -13,24 +13,25 @@ import java.io.IOException;
  */
 public class Output {
 
-	/**
-	 * Constructor of the Output class. Takes the information parsed in
-	 * Rectangle1 class and writes output to a text file.
-	 * 
-	 * @param outputFile
-	 *            the file to print to
-	 * @param str
-	 *            contains the data to print
-	 */
-	public Output(FileWriter outputFile, String str) {
+    /**
+     * Constructor of the Output class. Takes the information parsed in
+     * Rectangle1 class and writes output to a text file.
+     * 
+     * @param outputFile
+     *            the file to print to
+     * @param str
+     *            contains the data to print
+     */
+    public Output(FileWriter outputFile, String str) {
 
-		try {
-			outputFile.write(str);
-			outputFile.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+        try {
+            outputFile.write(str);
+            outputFile.close();
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
 
-	}
+    }
 
 }

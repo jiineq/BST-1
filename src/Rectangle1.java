@@ -43,59 +43,60 @@ import java.util.Scanner;
 
 public class Rectangle1 {
 
-	// private static StringBuilder printString; // the data to print
-	private static BST<Rectangle> tree;
-	private static ArrayList<Rectangle> rectangleList;
+    // private static StringBuilder printString; // the data to print
+    private static BST<Rectangle> tree;
+    private static ArrayList<Rectangle> rectangleList;
 
-	/**
-	 * The main function will process the commands invoked on the program.
-	 * 
-	 * @param args
-	 *            the arguments entered
-	 */
-	public static void main(String[] args) {
-		// invoked as java Rectangle1 {command-file}
-		if (0 < args.length) {
-			File input = new File(args[0]);
-			// File output = new File("Output.txt");
+    /**
+     * The main function will process the commands invoked on the program.
+     * 
+     * @param args
+     *            the arguments entered
+     */
+    public static void main(String[] args) {
+        // invoked as java Rectangle1 {command-file}
+        if (0 < args.length) {
+            File input = new File(args[0]);
+            // File output = new File("Output.txt");
 
-			tree = new BST<Rectangle>();
-			// printString = new StringBuilder();
-			rectangleList = new ArrayList<Rectangle>();
+            tree = new BST<Rectangle>();
+            // printString = new StringBuilder();
+            rectangleList = new ArrayList<Rectangle>();
 
-			try {
-				FileReader inputReader = new FileReader(input);
-				// FileWriter outputFile = new FileWriter(output);
+            try {
+                FileReader inputReader = new FileReader(input);
+                // FileWriter outputFile = new FileWriter(output);
 
-				Scanner scan = new Scanner(inputReader);
-				scan.useDelimiter("\n");
+                Scanner scan = new Scanner(inputReader);
+                scan.useDelimiter("\n");
 
-				// process the commands
-				while (scan.hasNext()) {
-					@SuppressWarnings("unused")
-					Commands commands = new Commands(scan.next(), tree,
-							rectangleList);
-				}
+                // process the commands
+                while (scan.hasNext()) {
+                    @SuppressWarnings("unused")
+                    Commands commands = new Commands(scan.next(), tree,
+                            rectangleList);
+                }
 
-				// create and write to the output file
-				// Output outputTextFile = new Output(outputFile,
-				// printString.toString());
+                // create and write to the output file
+                // Output outputTextFile = new Output(outputFile,
+                // printString.toString());
 
-				scan.close();
-			} catch (FileNotFoundException e) {
-				e.printStackTrace();
-				System.err.println("The file was not found.");
-			}
-			// catch (IOException e) {
-			// e.printStackTrace();
-			// System.err.println("Error while writing.");
-			// }
-		}
-		else {
-			System.out.println("Check arguments");
-			System.exit(0);
-		}
+                scan.close();
+            }
+            catch (FileNotFoundException e) {
+                e.printStackTrace();
+                System.err.println("The file was not found.");
+            }
+            // catch (IOException e) {
+            // e.printStackTrace();
+            // System.err.println("Error while writing.");
+            // }
+        }
+        else {
+            System.out.println("Check arguments");
+            System.exit(0);
+        }
 
-	}
+    }
 
 }
