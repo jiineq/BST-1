@@ -238,7 +238,7 @@ public class Commands extends Rectangle1 {
 			for (int i = tree.getStack().size() - 1; i >=0 ; i--) {
 				Rectangle rectOuter = tree.getStack().elementAt(i).element;
 				if (rect.intersect(rectOuter)) {
-					System.out.println(rect.toString() + " - " + rectOuter.toString());
+					System.out.println(rect.toString() + " : " + rectOuter.toString());
 				}
 			}
 		}
