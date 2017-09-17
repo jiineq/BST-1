@@ -45,7 +45,7 @@ public class BSTTest extends TestCase {
 	}
 	
 	/**
-	 * tests that remove() works as intended
+	 * tests that remove() works as intended.
 	 */
 	public void testRemove() {
 	    assertTrue(oneNode.contains("root"));
