@@ -45,7 +45,7 @@ public class BSTTest extends TestCase {
 	}
 	
 	/**
-	 * tests that remove() works as intended.
+	 * tests that remove() works as intended
 	 */
 	public void testRemove() {
 	    assertTrue(oneNode.contains("root"));
@@ -80,13 +80,13 @@ public class BSTTest extends TestCase {
 	public void testIterator() {
 	   // on empty bst
 	    assertNull(emptyBST.getStack());
-	    emptyBST.inorder_iterator();
+	    emptyBST.inorderIterator();
 	    assertNull(emptyBST.getStack());
 	    assertFalse(emptyBST.hasNext());
 	    
 	    // on non-empty bst
 	    assertNull(oneNode.getStack());
-	    oneNode.inorder_iterator();
+	    oneNode.inorderIterator();
 	    assertNotNull(oneNode.getStack());
 	    assertTrue(oneNode.hasNext());
 	    assertEquals("root", oneNode.next());
@@ -104,7 +104,7 @@ public class BSTTest extends TestCase {
 	    assertEquals("banana", threeNodes.getRoot().element);
 	    assertEquals("apple", threeNodes.getRoot().left.element);
 	    assertEquals("carrot", threeNodes.getRoot().right.element);
-	    threeNodes.inorder_iterator();
+	    threeNodes.inorderIterator();
 	    assertNotNull(threeNodes.getStack());
 	    assertEquals(3, threeNodes.getStack().size());
 	    assertTrue(threeNodes.hasNext());
