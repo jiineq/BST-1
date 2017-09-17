@@ -392,7 +392,12 @@ public class BST<T extends Comparable<? super T>> implements Iterator<T> {
             return null;
         }
         else {
-            BinaryNode<T> curr = nodeStack.pop();
+            BinaryNode<T> curr = nodeStack.peek();
+            nodeStack.pop();
+            
+            if (curr.right != null) {
+                goLeftFrom(curr.right);
+            }
             return curr.element;
         }
 
@@ -407,13 +412,14 @@ public class BST<T extends Comparable<? super T>> implements Iterator<T> {
             nodeStack = new Stack<BinaryNode<T>>();
             goLeftFrom(root);
 
-            BinaryNode<T> curr = nodeStack.peek();
-
-            if (curr.right != null) {
-                goLeftFrom(curr.right);
-                nodeStack.pop();
-                goRightFrom(curr.right);
-            }
+//            BinaryNode<T> curr = nodeStack.peek();
+//
+//            if (curr.right != null) {
+//                goLeftFrom(curr.right);
+//                nodeStack.pop();
+//                goRightFrom(curr.right);
+//            }
+            
         }
     }
 
