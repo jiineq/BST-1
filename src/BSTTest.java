@@ -73,6 +73,10 @@ public class BSTTest extends TestCase {
 	    assertEquals(1, oneNode.getDepth("another one", oneNode.getRoot()));
 	}
 	
+	/**
+	 * tests that getStack(), inorder_iterator(), hasNext(), and next() work 
+	 * as intended
+	 */
 	public void testIterator() {
 	   // on empty bst
 	    assertNull(emptyBST.getStack());
@@ -88,8 +92,27 @@ public class BSTTest extends TestCase {
 	    assertEquals("root", oneNode.next());
 	    assertFalse(oneNode.hasNext());
 	    
-	}
-	
-	
-	
+	    // on two node bst
+	    BST<String> threeNodes = new BST<String>();
+        threeNodes.insert("banana");
+        threeNodes.insert("apple");
+	    threeNodes.insert("carrot");
+	    assertNull(threeNodes.getStack());
+	    assertTrue(threeNodes.contains("apple"));
+	    assertTrue(threeNodes.contains("banana"));
+	    assertTrue(threeNodes.contains("carrot"));
+	    assertEquals("banana", threeNodes.getRoot().element);
+	    assertEquals("apple", threeNodes.getRoot().left.element);
+	    assertEquals("carrot", threeNodes.getRoot().right.element);
+	    threeNodes.inorder_iterator();
+	    assertNotNull(threeNodes.getStack());
+	    assertEquals(3, threeNodes.getStack().size());
+	    assertTrue(threeNodes.hasNext());
+	    assertEquals("apple", threeNodes.next());
+	    assertTrue(threeNodes.hasNext());
+	    assertEquals("banana", threeNodes.next());
+	    assertTrue(threeNodes.hasNext());
+	    assertEquals("carrot", threeNodes.next());
+	    assertFalse(threeNodes.hasNext());
+	}	
 }
