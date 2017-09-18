@@ -106,7 +106,7 @@ public class BSTTest extends TestCase {
 	    assertEquals("carrot", threeNodes.getRoot().right.element);
 	    threeNodes.inorderIterator();
 	    assertNotNull(threeNodes.getStack());
-	    assertEquals(3, threeNodes.getStack().size());
+	    assertEquals(2, threeNodes.getStack().size());
 	    assertTrue(threeNodes.hasNext());
 	    assertEquals("apple", threeNodes.next());
 	    assertTrue(threeNodes.hasNext());
