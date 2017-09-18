@@ -259,9 +259,9 @@ public class Commands extends Rectangle1 {
             Rectangle rect = tree.next();
             tree.setOtherStack();
             while (tree.hasNextInner()) {
-               Rectangle rectOuter = tree.nextInner();
+                Rectangle rectOuter = tree.nextInner();
                 if (rect.intersect(rectOuter)) {
-                   System.out.println(
+                    System.out.println(
                             rect.toString() + " : " + rectOuter.toString());
                 }
             }

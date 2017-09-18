@@ -394,6 +394,8 @@ public class BST<T extends Comparable<? super T>> implements Iterator<T> {
     }
 
     /**
+     * hasNext() method for an internal stack
+     * 
      * @return true if there is next item in the stack
      */
     public boolean hasNextInner() {
@@ -423,6 +425,8 @@ public class BST<T extends Comparable<? super T>> implements Iterator<T> {
     }
 
     /**
+     * next() method for an internal stack
+     * 
      * @return nextInner
      */
     public T nextInner() {
@@ -453,21 +457,6 @@ public class BST<T extends Comparable<? super T>> implements Iterator<T> {
     }
 
     /**
-     * Helper function to push nodes along the right branch, starting from the
-     * root until we reach a node with no left child.
-     * 
-     * @param t
-     *            the current node of the tree to be pushed
-     */
-    // private void goRightFrom(BinaryNode<T> t) {
-    // while (t != null) {
-    // nodeStack.push(t);
-    // t = t.right;
-    // }
-    //
-    // }
-
-    /**
      * Helper function to push nodes along the leftmost branch, starting from
      * the root until we reach a node with no left child.
      * 
@@ -480,9 +469,10 @@ public class BST<T extends Comparable<? super T>> implements Iterator<T> {
             t = t.left;
         }
     }
+
     /**
      * Helper function to push nodes along the leftmost branch, starting from
-     * the root until we reach a node with no left child.
+     * the root until we reach a node with no left child to an internal stack.
      * 
      * @param t
      *            the current node of the tree to be pushed
@@ -502,32 +492,36 @@ public class BST<T extends Comparable<? super T>> implements Iterator<T> {
     public Stack<BinaryNode<T>> getStack() {
         return nodeStack;
     }
-    
+
     /**
      * Sets internalStack to be a deep copy of the original stack
      */
     public void setOtherStack() {
         this.internalStack = deepCopy(this.getStack());
     }
-    
-    
+
     /**
-     * getter for the internal node stack
+     * Getter for the internal node stack
+     * 
      * @return the internal node stack
      */
     public Stack<BinaryNode<T>> getInternalStack() {
         return this.internalStack;
     }
+
     /**
      * private helper method for setOtherStack
-     * @param x originalStack
+     * 
+     * @param x
+     *            originalStack
      * @return deep copy of x
      */
     private Stack<BinaryNode<T>> deepCopy(Stack<BinaryNode<T>> x) {
-        if (x == null) return null;
+        if (x == null)
+            return null;
         // else
         Stack<BinaryNode<T>> copy = new Stack<BinaryNode<T>>();
-        for (int i = x.size() - 1; i >= 0; i --) {
+        for (int i = x.size() - 1; i >= 0; i--) {
             copy.push(x.elementAt(i));
         }
         return copy;
