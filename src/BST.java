@@ -65,7 +65,7 @@ public class BST<T extends Comparable<? super T>> implements Iterator<T> {
 
     private BinaryNode<T> root;
     private Stack<BinaryNode<T>> nodeStack;
-    private Stack<BinaryNode<T>> otherStack;
+    private Stack<BinaryNode<T>> internalStack;
     private int size;
 
     /**
@@ -251,6 +251,7 @@ public class BST<T extends Comparable<? super T>> implements Iterator<T> {
             root2 = (root2.left != null) ? root2.left : root2.right;
 
         }
+        size--;
         return root2;
     }
 
@@ -393,20 +394,16 @@ public class BST<T extends Comparable<? super T>> implements Iterator<T> {
     }
 
     /**
-     * Overloading method for hasNext that takes a premade stack as a parameter
-     * 
-     * @param stack
-     *            the stack being iterated
      * @return true if there is next item in the stack
      */
-    public boolean hasNext(Stack<BinaryNode<T>> stack) {
-        if (stack == null) {
+    public boolean hasNextInner() {
+        if (internalStack == null) {
             return false;
         }
-        if (stack.isEmpty()) {
+        if (internalStack.isEmpty()) {
             return false;
         }
-        return (stack.peek() != null);
+        return (internalStack.peek() != null);
     }
 
     @Override
@@ -426,22 +423,18 @@ public class BST<T extends Comparable<? super T>> implements Iterator<T> {
     }
 
     /**
-     * Overloading method for next that takes a premade stack as a parameter
-     * 
-     * @param stack
-     *            the stack being iterated
-     * @return the next element in the stack
+     * @return nextInner
      */
-    public T next(Stack<BinaryNode<T>> stack) {
-        if (stack.isEmpty()) {
+    public T nextInner() {
+        if (internalStack.isEmpty()) {
             return null;
         }
         else {
-            BinaryNode<T> curr = stack.peek();
-            stack.pop();
+            BinaryNode<T> curr = internalStack.peek();
+            internalStack.pop();
 
             if (curr.right != null) {
-                goLeftFrom(curr.right);
+                innerGoLeftFrom(curr.right);
             }
             return curr.element;
         }
@@ -454,7 +447,7 @@ public class BST<T extends Comparable<? super T>> implements Iterator<T> {
         if (root != null) {
             // properly positions first node
             nodeStack = new Stack<BinaryNode<T>>();
-            otherStack = new Stack<BinaryNode<T>>();
+
             goLeftFrom(root);
         }
     }
@@ -484,7 +477,19 @@ public class BST<T extends Comparable<? super T>> implements Iterator<T> {
     private void goLeftFrom(BinaryNode<T> t) {
         while (t != null) {
             nodeStack.push(t);
-            otherStack.push(t);
+            t = t.left;
+        }
+    }
+    /**
+     * Helper function to push nodes along the leftmost branch, starting from
+     * the root until we reach a node with no left child.
+     * 
+     * @param t
+     *            the current node of the tree to be pushed
+     */
+    private void innerGoLeftFrom(BinaryNode<T> t) {
+        while (t != null) {
+            internalStack.push(t);
             t = t.left;
         }
     }
@@ -499,12 +504,23 @@ public class BST<T extends Comparable<? super T>> implements Iterator<T> {
     }
     
     /**
-     * Getter for the other node stack
-     * 
-     * @return the other node stack
+     * Sets internalStack to be a deep copy of the original stack
      */
-    public Stack<BinaryNode<T>> getOtherStack() {
-        return otherStack;
+    public void setOtherStack() {
+        this.internalStack = deepCopy(this.getStack());
+    }
+    
+    /**
+     * private helper method for setOtherStack
+     * @param x originalStack
+     * @return deep copy of x
+     */
+    private Stack<BinaryNode<T>> deepCopy(Stack<BinaryNode<T>> x) {
+        Stack<BinaryNode<T>> copy = new Stack<BinaryNode<T>>();
+        for (int i = x.size() - 1; i >= 0; i --) {
+            copy.push(x.elementAt(i));
+        }
+        return copy;
     }
 
 }

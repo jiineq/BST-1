@@ -257,10 +257,11 @@ public class Commands extends Rectangle1 {
         tree.inorderIterator();
         while (tree.hasNext()) {
             Rectangle rect = tree.next();
-            for (int i = tree.getStack().size() - 1; i >= 0; i--) {
-                Rectangle rectOuter = tree.getStack().elementAt(i).element;
+            tree.setOtherStack();
+            while (tree.hasNextInner()) {
+               Rectangle rectOuter = tree.nextInner();
                 if (rect.intersect(rectOuter)) {
-                    System.out.println(
+                   System.out.println(
                             rect.toString() + " : " + rectOuter.toString());
                 }
             }
