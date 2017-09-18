@@ -350,6 +350,11 @@ public class BST<T extends Comparable<? super T>> implements Iterator<T> {
         return root;
     }
 
+    /**
+     * Getter for the size of the tree
+     * 
+     * @return the size of the tree
+     */
     public int getSize() {
         return size;
     }
