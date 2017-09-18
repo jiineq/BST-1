@@ -42,7 +42,6 @@ public class BST<T extends Comparable<? super T>> implements Iterator<T> {
          * @param elem
          *            the element to store in this node.
          */
-        @SuppressWarnings("unused")
         BinaryNode(T elem) {
             this(elem, null, null);
         }
@@ -66,6 +65,7 @@ public class BST<T extends Comparable<? super T>> implements Iterator<T> {
 
     private BinaryNode<T> root;
     private Stack<BinaryNode<T>> nodeStack;
+    private int size;
 
     /**
      * Constructs an empty tree.
@@ -171,6 +171,7 @@ public class BST<T extends Comparable<? super T>> implements Iterator<T> {
      */
     public void insert(T element) {
         root = this.insert(element, root);
+        size++;
     }
 
     /**
@@ -346,6 +347,10 @@ public class BST<T extends Comparable<? super T>> implements Iterator<T> {
     public BinaryNode<T> getRoot() {
         return root;
     }
+    
+    public int getSize() {
+        return size;
+    }
 
     /**
      * Find method that takes and returns a String object
@@ -430,13 +435,13 @@ public class BST<T extends Comparable<? super T>> implements Iterator<T> {
      * @param t
      *            the current node of the tree to be pushed
      */
-    private void goRightFrom(BinaryNode<T> t) {
-        while (t != null) {
-            nodeStack.push(t);
-            t = t.right;
-        }
-
-    }
+//    private void goRightFrom(BinaryNode<T> t) {
+//        while (t != null) {
+//            nodeStack.push(t);
+//            t = t.right;
+//        }
+//
+//    }
 
     /**
      * Helper function to push nodes along the leftmost branch, starting from

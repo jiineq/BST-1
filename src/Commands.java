@@ -63,9 +63,6 @@ public class Commands extends Rectangle1 {
         else if (command.contains("dump")) {
             processDump(command, tree, arr);
         }
-        else {
-            System.out.println("Invalid command.");
-        }
     }
 
     /**
@@ -314,20 +311,15 @@ public class Commands extends Rectangle1 {
                     "Node has depth 0, Value (" + tree.getRoot() + ")");
         }
         else {
-            for (int i = 0; i < tree.getStack().size(); i++) {
-                System.out.println("Node has depth "
-                        + tree.getDepth(tree.getStack().elementAt(i).element,
-                                tree.getRoot())
-                        + ", Value ("
-                        + tree.getStack().elementAt(i).element.getName() + ", "
-                        + tree.getStack().elementAt(i).element.getX() + ", "
-                        + tree.getStack().elementAt(i).element.getY() + ", "
-                        + tree.getStack().elementAt(i).element.getWidth() + ", "
-                        + tree.getStack().elementAt(i).element.getHeight()
-                        + ")");
+            while (tree.hasNext()) {
+                System.out
+                        .println("Node has depth "
+                                + tree.getDepth(tree.getStack().peek().element,
+                                        tree.getRoot())
+                                + ", Value " + tree.next());
             }
-            System.out.println("BST size is: " + tree.getStack().size());
         }
+        System.out.println("BST size is: " + tree.getSize());
     }
 
     /**
