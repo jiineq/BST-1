@@ -65,6 +65,7 @@ public class BST<T extends Comparable<? super T>> implements Iterator<T> {
 
     private BinaryNode<T> root;
     private Stack<BinaryNode<T>> nodeStack;
+    private Stack<BinaryNode<T>> otherStack;
     private int size;
 
     /**
@@ -453,20 +454,7 @@ public class BST<T extends Comparable<? super T>> implements Iterator<T> {
         if (root != null) {
             // properly positions first node
             nodeStack = new Stack<BinaryNode<T>>();
-            goLeftFrom(root);
-        }
-    }
-
-    /**
-     * Overloading method for inorderIterator that takes a premade stack as a
-     * parameter
-     * 
-     * @param stack
-     *            the stack to iterate inorder
-     */
-    public void inorderIterator(Stack<BinaryNode<T>> stack) {
-        if (root != null) {
-            // properly positions first node
+            otherStack = new Stack<BinaryNode<T>>();
             goLeftFrom(root);
         }
     }
@@ -496,6 +484,7 @@ public class BST<T extends Comparable<? super T>> implements Iterator<T> {
     private void goLeftFrom(BinaryNode<T> t) {
         while (t != null) {
             nodeStack.push(t);
+            otherStack.push(t);
             t = t.left;
         }
     }
@@ -507,6 +496,15 @@ public class BST<T extends Comparable<? super T>> implements Iterator<T> {
      */
     public Stack<BinaryNode<T>> getStack() {
         return nodeStack;
+    }
+    
+    /**
+     * Getter for the other node stack
+     * 
+     * @return the other node stack
+     */
+    public Stack<BinaryNode<T>> getOtherStack() {
+        return otherStack;
     }
 
 }
