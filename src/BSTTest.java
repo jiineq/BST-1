@@ -115,4 +115,65 @@ public class BSTTest extends TestCase {
 	    assertEquals("carrot", threeNodes.next());
 	    assertFalse(threeNodes.hasNext());
 	}	
+	
+	/**
+     * tests that getStack(), inorder_iterator(), hasNext(), and next() work 
+     * as intended
+     */
+    public void testInnerIterator() {
+       // on empty bst
+        assertNull(emptyBST.getStack());
+        emptyBST.inorderIterator();
+        emptyBST.setOtherStack();
+        assertNull(emptyBST.getStack());
+        assertNull(emptyBST.getInternalStack());
+        assertFalse(emptyBST.hasNext());
+        assertFalse(emptyBST.hasNextInner());
+        
+        // on non-empty bst
+        assertNull(oneNode.getStack());
+        oneNode.inorderIterator();
+        oneNode.setOtherStack();
+        assertNotNull(oneNode.getStack());
+        assertNotNull(oneNode.getInternalStack());
+        assertTrue(oneNode.hasNext());
+        assertTrue(oneNode.hasNextInner());
+        assertEquals("root", oneNode.next());
+        assertFalse(oneNode.hasNext());
+        assertTrue(oneNode.hasNextInner());
+        assertEquals("root", oneNode.nextInner());
+        assertFalse(oneNode.hasNextInner());
+        
+        // on two node bst
+        BST<String> threeNodes = new BST<String>();
+        threeNodes.insert("banana");
+        threeNodes.insert("apple");
+        threeNodes.insert("carrot");
+        assertNull(threeNodes.getStack());
+        assertTrue(threeNodes.contains("apple"));
+        assertTrue(threeNodes.contains("banana"));
+        assertTrue(threeNodes.contains("carrot"));
+        assertEquals("banana", threeNodes.getRoot().element);
+        assertEquals("apple", threeNodes.getRoot().left.element);
+        assertEquals("carrot", threeNodes.getRoot().right.element);
+        threeNodes.inorderIterator();
+        threeNodes.setOtherStack();
+        assertNotNull(threeNodes.getStack());
+        assertEquals(2, threeNodes.getStack().size());
+        assertTrue(threeNodes.hasNext());
+        assertTrue(threeNodes.hasNextInner());
+        assertEquals("apple", threeNodes.next());
+        threeNodes.setOtherStack();
+        assertTrue(threeNodes.hasNext());
+        assertTrue(threeNodes.hasNextInner());
+        assertEquals("banana", threeNodes.nextInner());
+        assertEquals("banana", threeNodes.next());
+        threeNodes.setOtherStack();
+        assertTrue(threeNodes.hasNext());
+        assertTrue(threeNodes.hasNextInner());
+        assertEquals("carrot", threeNodes.nextInner());
+        assertEquals("carrot", threeNodes.next());
+        assertFalse(threeNodes.hasNext());
+    }   
+	
 }
