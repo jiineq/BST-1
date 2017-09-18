@@ -510,12 +510,22 @@ public class BST<T extends Comparable<? super T>> implements Iterator<T> {
         this.internalStack = deepCopy(this.getStack());
     }
     
+    
+    /**
+     * getter for the internal node stack
+     * @return the internal node stack
+     */
+    public Stack<BinaryNode<T>> getInternalStack() {
+        return this.internalStack;
+    }
     /**
      * private helper method for setOtherStack
      * @param x originalStack
      * @return deep copy of x
      */
     private Stack<BinaryNode<T>> deepCopy(Stack<BinaryNode<T>> x) {
+        if (x == null) return null;
+        // else
         Stack<BinaryNode<T>> copy = new Stack<BinaryNode<T>>();
         for (int i = x.size() - 1; i >= 0; i --) {
             copy.push(x.elementAt(i));
