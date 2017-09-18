@@ -347,7 +347,7 @@ public class BST<T extends Comparable<? super T>> implements Iterator<T> {
     public BinaryNode<T> getRoot() {
         return root;
     }
-    
+
     public int getSize() {
         return size;
     }
@@ -391,6 +391,23 @@ public class BST<T extends Comparable<? super T>> implements Iterator<T> {
         return (nodeStack.peek() != null);
     }
 
+    /**
+     * Overloading method for hasNext that takes a premade stack as a parameter
+     * 
+     * @param stack
+     *            the stack being iterated
+     * @return true if there is next item in the stack
+     */
+    public boolean hasNext(Stack<BinaryNode<T>> stack) {
+        if (stack == null) {
+            return false;
+        }
+        if (stack.isEmpty()) {
+            return false;
+        }
+        return (stack.peek() != null);
+    }
+
     @Override
     public T next() {
         if (nodeStack.isEmpty()) {
@@ -399,13 +416,34 @@ public class BST<T extends Comparable<? super T>> implements Iterator<T> {
         else {
             BinaryNode<T> curr = nodeStack.peek();
             nodeStack.pop();
-            
+
             if (curr.right != null) {
                 goLeftFrom(curr.right);
             }
             return curr.element;
         }
+    }
 
+    /**
+     * Overloading method for next that takes a premade stack as a parameter
+     * 
+     * @param stack
+     *            the stack being iterated
+     * @return the next element in the stack
+     */
+    public T next(Stack<BinaryNode<T>> stack) {
+        if (stack.isEmpty()) {
+            return null;
+        }
+        else {
+            BinaryNode<T> curr = stack.peek();
+            stack.pop();
+
+            if (curr.right != null) {
+                goLeftFrom(curr.right);
+            }
+            return curr.element;
+        }
     }
 
     /**
@@ -416,15 +454,20 @@ public class BST<T extends Comparable<? super T>> implements Iterator<T> {
             // properly positions first node
             nodeStack = new Stack<BinaryNode<T>>();
             goLeftFrom(root);
+        }
+    }
 
-//            BinaryNode<T> curr = nodeStack.peek();
-//
-//            if (curr.right != null) {
-//                goLeftFrom(curr.right);
-//                nodeStack.pop();
-//                goRightFrom(curr.right);
-//            }
-            
+    /**
+     * Overloading method for inorderIterator that takes a premade stack as a
+     * parameter
+     * 
+     * @param stack
+     *            the stack to iterate inorder
+     */
+    public void inorderIterator(Stack<BinaryNode<T>> stack) {
+        if (root != null) {
+            // properly positions first node
+            goLeftFrom(root);
         }
     }
 
@@ -435,13 +478,13 @@ public class BST<T extends Comparable<? super T>> implements Iterator<T> {
      * @param t
      *            the current node of the tree to be pushed
      */
-//    private void goRightFrom(BinaryNode<T> t) {
-//        while (t != null) {
-//            nodeStack.push(t);
-//            t = t.right;
-//        }
-//
-//    }
+    // private void goRightFrom(BinaryNode<T> t) {
+    // while (t != null) {
+    // nodeStack.push(t);
+    // t = t.right;
+    // }
+    //
+    // }
 
     /**
      * Helper function to push nodes along the leftmost branch, starting from
