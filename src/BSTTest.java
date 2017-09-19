@@ -225,7 +225,7 @@ public class BSTTest extends TestCase {
 
     /**
      * tests that getStack(), inorder_iterator(), hasNext(), and next() work as
-     * intended
+     * intended.
      */
     public void testInnerIterator() {
         // on empty bst
