@@ -4,11 +4,13 @@ insert rectangle6 460 460 10 10
 insert rectangle1 0 0 50 50
 insert rectangle2 50 50 50 50
 insert rectangle3 100 101 102 103
-
+insert rectangle1 3 3 50 50
 
 
 remove 99 90 95 94
  dump 
+remove rectangle4
+dump
 search rectangle1
 search rectangle2
 
