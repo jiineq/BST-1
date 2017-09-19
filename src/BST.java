@@ -354,7 +354,7 @@ public class BST<T extends Comparable<? super T>> implements Iterator<T> {
         if (nodeStack.isEmpty()) {
             return false;
         }
-        return (nodeStack.peek() != null);
+        return (nodeStack.peek().element != null);
     }
 
     /**
@@ -369,7 +369,7 @@ public class BST<T extends Comparable<? super T>> implements Iterator<T> {
         if (internalStack.isEmpty()) {
             return false;
         }
-        return (internalStack.peek() != null);
+        return (internalStack.peek().element != null);
     }
 
     @Override

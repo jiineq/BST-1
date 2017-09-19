@@ -188,6 +188,7 @@ public class BSTTest extends TestCase {
         assertFalse(emptyBST.hasNext());
         emptyBST.insert(null);
         emptyBST.inorderIterator();
+        assertFalse(emptyBST.hasNext());
         assertNull(emptyBST.next());
 
         // on non-empty bst
@@ -239,6 +240,7 @@ public class BSTTest extends TestCase {
         emptyBST.insert(null);
         emptyBST.inorderIterator();
         emptyBST.setOtherStack();
+        assertFalse(emptyBST.hasNextInner());
         assertNull(emptyBST.nextInner());
 
         // on non-empty bst
