@@ -172,7 +172,6 @@ public class BST<T extends Comparable<? super T>> implements Iterator<T> {
      */
     public void insert(T element) {
         root = this.insert(element, root);
-        size++;
     }
 
     /**
@@ -205,6 +204,7 @@ public class BST<T extends Comparable<? super T>> implements Iterator<T> {
             BinaryNode<T> successor = this.findMin(root2.right);
             successor.left = root2;
         }
+        size++;
         return root2;
     }
 
@@ -357,34 +357,6 @@ public class BST<T extends Comparable<? super T>> implements Iterator<T> {
      */
     public int getSize() {
         return size;
-    }
-
-    /**
-     * Find method that takes and returns a String object
-     * 
-     * @param name
-     *            the String name of the element to search for
-     * @param root2
-     *            the current node being looked at
-     * @return the String of the element being search for
-     */
-    public String find(String name, BinaryNode<T> root2) {
-        if (root2 == null) {
-            return "";
-        }
-
-        int compareResult = name.compareTo(root2.element.toString());
-
-        if (compareResult < 0) {
-            return find(name, root2.left);
-        }
-        else if (compareResult > 0) {
-            return find(name, root2.right);
-        }
-        else {
-            return root2.element.toString();
-        }
-
     }
 
     @Override
