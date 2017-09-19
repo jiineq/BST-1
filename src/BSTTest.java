@@ -190,6 +190,7 @@ public class BSTTest extends TestCase {
         emptyBST.inorderIterator();
         assertNull(emptyBST.next());
 
+
         // on non-empty bst
         assertNull(oneNode.getStack());
         oneNode.inorderIterator();
@@ -253,6 +254,8 @@ public class BSTTest extends TestCase {
         assertTrue(oneNode.hasNextInner());
         assertEquals("root", oneNode.nextInner());
         assertFalse(oneNode.hasNextInner());
+        assertNull(oneNode.next());
+        assertNull(oneNode.nextInner());
 
         // on two node bst
         BST<String> threeNodes = new BST<String>();
