@@ -190,7 +190,6 @@ public class BSTTest extends TestCase {
         emptyBST.inorderIterator();
         assertNull(emptyBST.next());
 
-
         // on non-empty bst
         assertNull(oneNode.getStack());
         oneNode.inorderIterator();
