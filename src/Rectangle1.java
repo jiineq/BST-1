@@ -1,8 +1,4 @@
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-// import java.io.FileWriter;
-// import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -43,9 +39,11 @@ import java.util.Scanner;
 
 public class Rectangle1 {
 
-    // private static StringBuilder printString; // the data to print
+    public static StringBuilder printString; // the data to print
     private static BST<Rectangle> tree;
     private static ArrayList<Rectangle> rectangleList;
+    @SuppressWarnings("unused")
+    private static Output outputTextFile;
 
     /**
      * The main function will process the commands invoked on the program.
@@ -57,15 +55,17 @@ public class Rectangle1 {
         // invoked as java Rectangle1 {command-file}
         if (0 < args.length) {
             File input = new File(args[0]);
-            // File output = new File("Output.txt");
+//            File output = new File("Output.txt");
+             File output = new File(args[0].substring(0, args[0].length()-4) + "Output.txt");
+            
 
             tree = new BST<Rectangle>();
-            // printString = new StringBuilder();
+            printString = new StringBuilder();
             rectangleList = new ArrayList<Rectangle>();
 
             try {
                 FileReader inputReader = new FileReader(input);
-                // FileWriter outputFile = new FileWriter(output);
+                FileWriter outputFile = new FileWriter(output);
 
                 Scanner scan = new Scanner(inputReader);
                 scan.useDelimiter("\n");
@@ -78,23 +78,24 @@ public class Rectangle1 {
                 }
 
                 // create and write to the output file
-                // Output outputTextFile = new Output(outputFile,
-                // printString.toString());
+                 outputTextFile = new Output(outputFile,
+                 printString.toString());
 
                 scan.close();
             }
             catch (FileNotFoundException e) {
                 e.printStackTrace();
+                printString.append("The file was not found.");
                 System.err.println("The file was not found.");
             }
-            // catch (IOException e) {
-            // e.printStackTrace();
-            // System.err.println("Error while writing.");
-            // }
+             catch (IOException e) {
+             e.printStackTrace();
+             printString.append("Error while writing.");
+             System.err.println("Error while writing.");
+             }
         }
         else {
-            System.out.println("Check arguments");
-            System.exit(0);
+            System.err.println("Check arguments");
         }
 
     }
