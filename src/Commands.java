@@ -138,13 +138,14 @@ public class Commands extends Rectangle1 {
 
             // reject the rectangle if not in the tree
             if (result == null) {
-                System.out.println("Rectangle rejected: (" + tok + ", " + yString
-                        + ", " + wString + ", " + hString + ")");
+                System.out.println("Rectangle rejected: (" + tok + ", "
+                        + yString + ", " + wString + ", " + hString + ")");
             }
             else { // remove the rectangle if it is in the tree
                 tree.remove(result);
                 arr.remove(result);
-                //System.out.println("Rectangle removed: " + result.toString());
+                // System.out.println("Rectangle removed: " +
+                // result.toString());
             }
 
         }
@@ -158,7 +159,8 @@ public class Commands extends Rectangle1 {
             else { // remove the rectangle if it is in the tree
                 tree.remove(result);
                 arr.remove(result);
-                //System.out.println("Rectangle removed: " + result.toString());
+                // System.out.println("Rectangle removed: " +
+                // result.toString());
             }
 
         }

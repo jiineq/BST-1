@@ -109,24 +109,6 @@ public class BST<T extends Comparable<? super T>> implements Iterator<T> {
     }
 
     /**
-     * This function finds the maximum value in the tree.
-     * 
-     * @param root2
-     *            the current element being looked at
-     * @return the maximum node in the tree
-     */
-    @SuppressWarnings("unused")
-    private BinaryNode<T> findMax(BinaryNode<T> root2) {
-        if (root2 == null) {
-            return null;
-        }
-        else if (root2.right == null) {
-            return root2;
-        }
-        return findMax(root2.right);
-    }
-
-    /**
      * This method finds a node with the given element as its key
      * 
      * @param element
@@ -499,8 +481,9 @@ public class BST<T extends Comparable<? super T>> implements Iterator<T> {
      * @return deep copy of x
      */
     private Stack<BinaryNode<T>> deepCopy(Stack<BinaryNode<T>> x) {
-        if (x == null)
+        if (x == null) {
             return null;
+        }
         // else
         Stack<BinaryNode<T>> copy = new Stack<BinaryNode<T>>();
         for (int i = x.size() - 1; i >= 0; i--) {

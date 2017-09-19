@@ -28,7 +28,7 @@ public class BSTTest extends TestCase {
      * tests that the constructor works as intended
      */
     public void testConstructor() {
-        assertTrue(emptyBST.getRoot() == null);
+        assertNull(emptyBST.getRoot());
     }
 
     /**
