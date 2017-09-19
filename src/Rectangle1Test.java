@@ -42,7 +42,6 @@ public class Rectangle1Test extends TestCase{
         assertNotNull(caught);
         assertFalse(caught instanceof FileNotFoundException);
         
-        
         // test output
         Scanner scan = new Scanner("TestOutput.txt");
         scan.useDelimiter("\n");
