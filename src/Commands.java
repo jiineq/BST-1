@@ -265,8 +265,8 @@ public class Commands extends Rectangle1 {
      */
     private static void processIntersections(String next, BST<Rectangle> tree,
             ArrayList<Rectangle> arr) {
-        printString.append("Intersection pairs: \n");
-        System.out.println("Intersection pairs: ");
+        printString.append("Intersection pairs:\n");
+        System.out.println("Intersection pairs:");
         tree.inorderIterator();
         while (tree.hasNext()) {
             Rectangle rect = tree.next();
@@ -320,7 +320,7 @@ public class Commands extends Rectangle1 {
      */
     private static void processDump(String next, BST<Rectangle> tree,
             ArrayList<Rectangle> arr) {
-        printString.append("BST Dump: \n");
+        printString.append("BST Dump:\n");
         System.out.println("BST Dump:");
         tree.inorderIterator();
 
