@@ -168,10 +168,12 @@ public class BSTTest extends TestCase {
     public void testDepth() {
         oneNode.insert("beyonce");
         oneNode.insert("adele");
+        oneNode.insert("sza");
         assertEquals(0, emptyBST.getDepth("root", emptyBST.getRoot()));
         assertEquals(0, oneNode.getDepth("root", oneNode.getRoot()));
         assertEquals(2, oneNode.getDepth("adele", oneNode.getRoot()));
         assertEquals(1, oneNode.getDepth("beyonce", oneNode.getRoot()));
+        assertEquals(1, oneNode.getDepth("sza", oneNode.getRoot()));
     }
 
     /**
@@ -196,6 +198,7 @@ public class BSTTest extends TestCase {
         assertTrue(oneNode.hasNext());
         assertEquals("root", oneNode.next());
         assertFalse(oneNode.hasNext());
+        assertNull(oneNode.next());
 
         // on two node bst
         BST<String> threeNodes = new BST<String>();
@@ -252,6 +255,7 @@ public class BSTTest extends TestCase {
         assertTrue(oneNode.hasNextInner());
         assertEquals("root", oneNode.nextInner());
         assertFalse(oneNode.hasNextInner());
+        assertNull(oneNode.nextInner());
 
         // on two node bst
         BST<String> threeNodes = new BST<String>();
