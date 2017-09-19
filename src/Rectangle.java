@@ -61,7 +61,31 @@ public class Rectangle implements Comparable<Rectangle> {
      * @return true if the Rectangle is valid, false otherwise
      */
     public boolean isValid() {
-        return (h > 0 && w > 0 && x >= 0 && y >= 0 && x <= 1024 && y <= 1024);
+        return (validCoordinates() && validRange() && validDimensions());
+    }
+    
+    /**
+     * helper method that checks x and y coordinates
+     * @return true if x and y are both greater than 0
+     */
+    private boolean validCoordinates() {
+        return (x >= 0 && y >= 0);
+    }
+    
+    /**
+     * helper method that checks that the rectangle doesnt leave the bounds
+     * @return true if x + w and y + h are less than bounds
+     */
+    private boolean validRange() {
+        return ((x +  w <= 1024) && (y + h <= 1024));
+    }
+    
+    /**
+     * helper method that checks that the rectangle has real dimension
+     * @return true if w and h are both greater than 0
+     */
+    private boolean validDimensions() {
+        return (w > 0 && h > 0);
     }
 
     /**
@@ -129,7 +153,7 @@ public class Rectangle implements Comparable<Rectangle> {
         double xMax1 = this.getX() + this.getWidth();
         double xMax2 = other.getX() + other.getWidth();
         double yMax1 = this.getY() + this.getHeight();
-        double yMax2 = other.getX() + other.getHeight();
+        double yMax2 = other.getY() + other.getHeight();
 
         double xDistance = Math.max(0,
                 Math.min(xMax2, xMax1) - Math.max(this.getX(), other.getX()));
