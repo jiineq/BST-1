@@ -172,6 +172,7 @@ public class BST<T extends Comparable<? super T>> implements Iterator<T> {
      */
     public void insert(T element) {
         root = this.insert(element, root);
+        size++;
     }
 
     /**
@@ -202,9 +203,13 @@ public class BST<T extends Comparable<? super T>> implements Iterator<T> {
         else {
             // duplicate insert
             BinaryNode<T> successor = this.findMin(root2.right);
-            successor.left = root2;
+            if (successor != null) {
+                successor.left = new BinaryNode<T>(element);
+            }
+            else {
+                root2.right = new BinaryNode<T>(element);
+            }
         }
-        size++;
         return root2;
     }
 
@@ -216,6 +221,7 @@ public class BST<T extends Comparable<? super T>> implements Iterator<T> {
      */
     public void remove(T element) {
         root = this.remove(element, root);
+        size--;
     }
 
     /**
@@ -251,7 +257,6 @@ public class BST<T extends Comparable<? super T>> implements Iterator<T> {
             root2 = (root2.left != null) ? root2.left : root2.right;
 
         }
-        size--;
         return root2;
     }
 
