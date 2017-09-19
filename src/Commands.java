@@ -288,7 +288,7 @@ public class Commands extends Rectangle1 {
         Rectangle result = tree.find(findRect(name, arr));
 
         // prints the results of the search
-        if (result == null || result.getName().equals("")) {
+        if (result == null) {
             System.out.println("Rectangle not found: " + name);
         }
         else {
@@ -333,14 +333,14 @@ public class Commands extends Rectangle1 {
      * @return the Rectangle object being looked for, or null if it is not found
      */
     private static Rectangle findRect(String name, ArrayList<Rectangle> arr) {
-        if (arr.size() == 0) {
-            return null;
-        }
-        for (int i = 0; i < arr.size(); i++) {
-            if (name.compareTo(arr.get(i).getName()) == 0) {
-                return arr.get(i);
+        if (!arr.isEmpty()) {
+            for (int i = 0; i < arr.size(); i++) {
+                if (name.compareTo(arr.get(i).getName()) == 0) {
+                    return arr.get(i);
+                }
             }
         }
+
         return null;
     }
 }

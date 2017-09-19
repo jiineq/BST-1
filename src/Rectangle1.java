@@ -73,7 +73,7 @@ public class Rectangle1 {
                 // process the commands
                 while (scan.hasNext()) {
                     @SuppressWarnings("unused")
-                    Commands commands = new Commands(scan.next(), tree,
+                    Commands commands = new Commands(scan.next(), tree, 
                             rectangleList);
                 }
 
