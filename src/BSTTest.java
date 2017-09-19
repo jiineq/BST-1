@@ -52,13 +52,22 @@ public class BSTTest extends TestCase {
         assertFalse(emptyBST.contains("CArdi"));
         assertTrue(emptyBST.contains("beyonce"));
         
-        //duplicate option
+    }
+    
+    /**
+     * tests that insert() works with duplicates
+     */
+    public void testInsertDuplicate() {
+        assertTrue(emptyBST.isEmpty());
+        assertFalse(emptyBST.contains("beyonce"));
         emptyBST.insert("beyonce");
+        assertTrue(emptyBST.contains("beyonce"));
+        emptyBST.insert("beyonce"); //duplicate 1
         emptyBST.insert("vance");
         emptyBST.insert("zhu");
         emptyBST.insert("xxx");
-        emptyBST.insert("vance");
-        assertEquals(7, emptyBST.getSize());
+        emptyBST.insert("vance"); // duplicate 2
+        assertEquals(6, emptyBST.getSize());
         assertTrue(emptyBST.contains("vance"));
         emptyBST.remove("vance");
         assertTrue(emptyBST.contains("vance"));
@@ -68,14 +77,16 @@ public class BSTTest extends TestCase {
     /**
      * tests that remove() works as intended
      */
-    public void testRemove() {
+    public void testRemoveEmpty() {
         // test on empty BST
         emptyBST.remove("root");
         assertNull(emptyBST.getRoot());
         
         assertTrue(oneNode.contains("root"));
         assertFalse(oneNode.isEmpty());
-        
+    }
+    
+    public void testRemoveRoot() {
         //populate BST
         oneNode.insert("root"); // dupe
         oneNode.insert("beyonce");
@@ -90,19 +101,29 @@ public class BSTTest extends TestCase {
         assertEquals("root", oneNode.getRoot().element);
         assertFalse(oneNode.isEmpty());
         assertEquals(5, oneNode.getSize());
+    }
+        
+    public void testRemoveTwoChildren() {
+        //populate BST
+        oneNode.insert("root"); // dupe
+        oneNode.insert("beyonce");
+        oneNode.insert("cardi");
+        oneNode.insert("adelle");
+        oneNode.insert("dvsn");
+        assertEquals(6, oneNode.getSize());
         
         //remove item with two children
         oneNode.remove("beyonce");
         assertFalse(oneNode.contains("beyonce"));
         assertEquals("root", oneNode.getRoot().element);
         assertFalse(oneNode.isEmpty());
-        assertEquals(4, oneNode.getSize());        
+        assertEquals(5, oneNode.getSize());        
     }
     
     /**
      * tests that remove() works as intended
      */
-    public void testRemoveCase1() {
+    public void testRemoveRightChild() {
         //populate BST
         oneNode.insert("beyonce");
         oneNode.insert("cardi");
@@ -119,14 +140,13 @@ public class BSTTest extends TestCase {
         assertFalse(oneNode.contains("cardi"));
         assertEquals("root", oneNode.getRoot().element);
         assertFalse(oneNode.isEmpty());
-  
         assertEquals(3, oneNode.getSize());        
     }
     
     /**
      * tests that remove() works as intended
      */
-    public void testRemoveCase2() {
+    public void testRemoveLeftChild() {
         //populate BST
         oneNode.insert("beyonce");
         oneNode.insert("dvsn");
@@ -143,16 +163,21 @@ public class BSTTest extends TestCase {
         assertFalse(oneNode.contains("dvsn"));
         assertEquals("root", oneNode.getRoot().element);
         assertFalse(oneNode.isEmpty());
-  
         assertEquals(3, oneNode.getSize());        
     }
 
     /**
      * tests that find() works as intended
      */
-    public void testFind() {
+    public void testFindEmpty() {
         assertNull(emptyBST.find("nothing"));
         assertNull(emptyBST.find(null));
+    }
+    
+    /**
+     * tests that find() works as intended
+     */
+    public void testFindNonEmpty() {
         assertEquals("root", oneNode.find("root"));
         oneNode.insert("beyonce");
         oneNode.insert("nicki");
@@ -180,7 +205,7 @@ public class BSTTest extends TestCase {
      * tests that getStack(), inorder_iterator(), hasNext(), and next() work as
      * intended
      */
-    public void testIterator() {
+    public void testIteratorEmpty() {
         // on empty bst
         assertNull(emptyBST.getStack());
         emptyBST.inorderIterator();
@@ -190,7 +215,12 @@ public class BSTTest extends TestCase {
         emptyBST.inorderIterator();
         assertFalse(emptyBST.hasNext());
         assertNull(emptyBST.next());
-
+    }
+    
+    /**
+     * tests the hasNext() and next() methods of iterator
+     */
+    public void testIteratorOneNode() {
         // on non-empty bst
         assertNull(oneNode.getStack());
         oneNode.inorderIterator();
@@ -199,21 +229,25 @@ public class BSTTest extends TestCase {
         assertEquals("root", oneNode.next());
         assertFalse(oneNode.hasNext());
         assertNull(oneNode.next());
-
-        // on two node bst
+    }
+    
+    /**
+     * tests the hasNext() and next() methods of iterator
+     */
+    public void testIteratorThreeNodes() {
+        // populate tree
         BST<String> threeNodes = new BST<String>();
         threeNodes.insert("banana");
         threeNodes.insert("apple");
         threeNodes.insert("carrot");
-        assertNull(threeNodes.getStack());
-        assertTrue(threeNodes.contains("apple"));
-        assertTrue(threeNodes.contains("banana"));
-        assertTrue(threeNodes.contains("carrot"));
         assertEquals("banana", threeNodes.getRoot().element);
         assertEquals("apple", threeNodes.getRoot().left.element);
         assertEquals("carrot", threeNodes.getRoot().right.element);
+        
+        // generate stack
         threeNodes.inorderIterator();
         assertNotNull(threeNodes.getStack());
+        
         assertEquals(2, threeNodes.getStack().size());
         assertTrue(threeNodes.hasNext());
         assertEquals("apple", threeNodes.next());
@@ -228,7 +262,7 @@ public class BSTTest extends TestCase {
      * tests that getStack(), inorder_iterator(), hasNext(), and next() work as
      * intended.
      */
-    public void testInnerIterator() {
+    public void testInnerIteratorEmpty() {
         // on empty bst
         assertNull(emptyBST.getStack());
         emptyBST.inorderIterator();
@@ -242,8 +276,12 @@ public class BSTTest extends TestCase {
         emptyBST.setOtherStack();
         assertFalse(emptyBST.hasNextInner());
         assertNull(emptyBST.nextInner());
-
-        // on non-empty bst
+    }
+    
+    /**
+     * tests the inner methods of iterator
+     */
+    public void testInnerIteratorOneNode() {
         assertNull(oneNode.getStack());
         oneNode.inorderIterator();
         oneNode.setOtherStack();
@@ -257,37 +295,28 @@ public class BSTTest extends TestCase {
         assertEquals("root", oneNode.nextInner());
         assertFalse(oneNode.hasNextInner());
         assertNull(oneNode.nextInner());
-
-        // on two node bst
+    }
+    
+    /**
+     * test the inner methods of iterator
+     */
+    public void testInnerIteratorThreeNodes() {
         BST<String> threeNodes = new BST<String>();
         threeNodes.insert("banana");
         threeNodes.insert("apple");
         threeNodes.insert("carrot");
         assertNull(threeNodes.getStack());
-        assertTrue(threeNodes.contains("apple"));
-        assertTrue(threeNodes.contains("banana"));
-        assertTrue(threeNodes.contains("carrot"));
         assertEquals("banana", threeNodes.getRoot().element);
         assertEquals("apple", threeNodes.getRoot().left.element);
         assertEquals("carrot", threeNodes.getRoot().right.element);
         threeNodes.inorderIterator();
-        threeNodes.setOtherStack();
-        assertNotNull(threeNodes.getStack());
-        assertEquals(2, threeNodes.getStack().size());
-        assertTrue(threeNodes.hasNext());
-        assertTrue(threeNodes.hasNextInner());
         assertEquals("apple", threeNodes.next());
         threeNodes.setOtherStack();
-        assertTrue(threeNodes.hasNext());
         assertTrue(threeNodes.hasNextInner());
         assertEquals("banana", threeNodes.nextInner());
-        assertEquals("banana", threeNodes.next());
-        threeNodes.setOtherStack();
-        assertTrue(threeNodes.hasNext());
-        assertTrue(threeNodes.hasNextInner());
         assertEquals("carrot", threeNodes.nextInner());
-        assertEquals("carrot", threeNodes.next());
-        assertFalse(threeNodes.hasNext());
+        assertTrue(threeNodes.hasNext());
+        assertFalse(threeNodes.hasNextInner());
     }
 
 }
