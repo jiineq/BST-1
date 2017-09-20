@@ -30,6 +30,8 @@ public class Commands extends Rectangle1 {
      *            the BST holding the data
      * @param arr
      *            the arrayList of Rectangle objects
+     * @param printString
+     *            the printString that will be used to print
      */
     public Commands(String command, BST<Rectangle> tree,
             ArrayList<Rectangle> arr, StringBuilder printString) {
@@ -100,8 +102,7 @@ public class Commands extends Rectangle1 {
 
         }
         else { // reject an invalid Rectangle
-            printString
-                    .append("Rectangle rejected: " + rect.toString() + "\n");
+            printString.append("Rectangle rejected: " + rect.toString() + "\n");
             System.out.println("Rectangle rejected: " + rect.toString());
         }
 
@@ -241,8 +242,8 @@ public class Commands extends Rectangle1 {
         // treat the region being searched as a "ghost" rectangle.
         Rectangle region = new Rectangle("Region", x, y, w, h);
 
-        printString.append("Rectangles intersecting region " + "(" + x
-                + ", " + y + ", " + w + ", " + h + "):\n");
+        printString.append("Rectangles intersecting region " + "(" + x + ", "
+                + y + ", " + w + ", " + h + "):\n");
         System.out.println("Rectangles intersecting region " + "(" + x + ", "
                 + y + ", " + w + ", " + h + "):");
 
@@ -308,8 +309,7 @@ public class Commands extends Rectangle1 {
             System.out.println("Rectangle not found: " + name);
         }
         else {
-            printString
-                    .append("Rectangle found: " + result.toString() + "\n");
+            printString.append("Rectangle found: " + result.toString() + "\n");
             System.out.println("Rectangle found: " + result.toString());
         }
 
