@@ -32,8 +32,8 @@ public class Commands extends Rectangle1 {
      *            the arrayList of Rectangle objects
      */
     public Commands(String command, BST<Rectangle> tree,
-            ArrayList<Rectangle> arr) {
-        parseCommands(command, tree, arr);
+            ArrayList<Rectangle> arr, StringBuilder printString) {
+        parseCommands(command, tree, arr, printString);
     }
 
     /**
@@ -44,24 +44,24 @@ public class Commands extends Rectangle1 {
      *            the current line to be parsed from the input file
      */
     private void parseCommands(String command, BST<Rectangle> tree,
-            ArrayList<Rectangle> arr) {
+            ArrayList<Rectangle> arr, StringBuilder printString) {
         if (command.contains("insert")) {
-            processInsert(command, tree, arr);
+            processInsert(command, tree, arr, printString);
         }
         else if (command.contains("remove")) {
-            processRemove(command, tree, arr);
+            processRemove(command, tree, arr, printString);
         }
         else if (command.contains("regionsearch")) {
-            processRegionSearch(command, tree, arr);
+            processRegionSearch(command, tree, arr, printString);
         }
         else if (command.contains("intersections")) {
-            processIntersections(command, tree, arr);
+            processIntersections(command, tree, arr, printString);
         }
         else if (command.contains("search")) {
-            processSearch(command, tree, arr);
+            processSearch(command, tree, arr, printString);
         }
         else if (command.contains("dump")) {
-            processDump(command, tree, arr);
+            processDump(command, tree, arr, printString);
         }
     }
 
@@ -73,7 +73,7 @@ public class Commands extends Rectangle1 {
      *            the current line being processed
      */
     private static void processInsert(String next, BST<Rectangle> tree,
-            ArrayList<Rectangle> arr) {
+            ArrayList<Rectangle> arr, StringBuilder printString) {
         Scanner insertScan = new Scanner(next);
         insertScan.next(); // skips the token that has the word insert
         String name = insertScan.next();
@@ -95,13 +95,12 @@ public class Commands extends Rectangle1 {
         if (rect.isValid()) {
             tree.insert(rect);
             arr.add(rect);
-            getPrintString()
-                    .append("Rectangle accepted: " + rect.toString() + "\n");
+            printString.append("Rectangle accepted: " + rect.toString() + "\n");
             System.out.println("Rectangle accepted: " + rect.toString());
 
         }
         else { // reject an invalid Rectangle
-            getPrintString()
+            printString
                     .append("Rectangle rejected: " + rect.toString() + "\n");
             System.out.println("Rectangle rejected: " + rect.toString());
         }
@@ -119,7 +118,7 @@ public class Commands extends Rectangle1 {
      *            the current line being processed
      */
     private static void processRemove(String next, BST<Rectangle> tree,
-            ArrayList<Rectangle> arr) {
+            ArrayList<Rectangle> arr, StringBuilder printString) {
         Scanner removeScan = new Scanner(next);
         removeScan.next(); // skips the token that has the word remove
         String tok = removeScan.next();
@@ -143,7 +142,7 @@ public class Commands extends Rectangle1 {
 
             // reject the rectangle if not in the tree
             if (result == null) {
-                getPrintString().append("Rectangle rejected: (" + tok + ", "
+                printString.append("Rectangle rejected: (" + tok + ", "
                         + yString + ", " + wString + ", " + hString + ")\n");
                 System.out.println("Rectangle rejected: (" + tok + ", "
                         + yString + ", " + wString + ", " + hString + ")");
@@ -161,7 +160,7 @@ public class Commands extends Rectangle1 {
 
             // reject the rectangle if not in the tree
             if (result == null) {
-                getPrintString().append("Rectangle rejected: " + tok + "\n");
+                printString.append("Rectangle rejected: " + tok + "\n");
                 System.out.println("Rectangle rejected: " + tok);
             }
             else { // remove the rectangle if it is in the tree
@@ -218,7 +217,7 @@ public class Commands extends Rectangle1 {
      * @return true if valid region and found something, else false
      */
     private static boolean processRegionSearch(String next, BST<Rectangle> tree,
-            ArrayList<Rectangle> arr) {
+            ArrayList<Rectangle> arr, StringBuilder printString) {
         Scanner regionScan = new Scanner(next);
         regionScan.next(); // skips over the token that has the word
                            // regionsearch
@@ -232,7 +231,7 @@ public class Commands extends Rectangle1 {
         regionScan.close();
 
         if (w <= 0 || h <= 0) {
-            getPrintString().append("Rectangle rejected: " + "(" + x + ", " + y
+            printString.append("Rectangle rejected: " + "(" + x + ", " + y
                     + ", " + w + ", " + h + ")\n");
             System.out.println("Rectangle rejected: " + "(" + x + ", " + y
                     + ", " + w + ", " + h + ")");
@@ -242,7 +241,7 @@ public class Commands extends Rectangle1 {
         // treat the region being searched as a "ghost" rectangle.
         Rectangle region = new Rectangle("Region", x, y, w, h);
 
-        getPrintString().append("Rectangles intersecting region " + "(" + x
+        printString.append("Rectangles intersecting region " + "(" + x
                 + ", " + y + ", " + w + ", " + h + "):\n");
         System.out.println("Rectangles intersecting region " + "(" + x + ", "
                 + y + ", " + w + ", " + h + "):");
@@ -253,7 +252,7 @@ public class Commands extends Rectangle1 {
                 if (!found) {
                     found = true;
                 }
-                getPrintString().append(rect.toString() + "\n");
+                printString.append(rect.toString() + "\n");
                 System.out.println(rect.toString());
             }
         }
@@ -267,8 +266,8 @@ public class Commands extends Rectangle1 {
      *            the current line being processed
      */
     private static void processIntersections(String next, BST<Rectangle> tree,
-            ArrayList<Rectangle> arr) {
-        getPrintString().append("Intersection pairs:\n");
+            ArrayList<Rectangle> arr, StringBuilder printString) {
+        printString.append("Intersection pairs:\n");
         System.out.println("Intersection pairs:");
         tree.inorderIterator();
         while (tree.hasNext()) {
@@ -277,7 +276,7 @@ public class Commands extends Rectangle1 {
             while (tree.hasNextInner()) {
                 Rectangle rectOuter = tree.nextInner();
                 if (rect.intersect(rectOuter)) {
-                    getPrintString().append(rect.toString() + " : "
+                    printString.append(rect.toString() + " : "
                             + rectOuter.toString() + "\n");
                     System.out.println(
                             rect.toString() + " : " + rectOuter.toString());
@@ -294,7 +293,7 @@ public class Commands extends Rectangle1 {
      *            the current line being processed
      */
     private static void processSearch(String next, BST<Rectangle> tree,
-            ArrayList<Rectangle> arr) {
+            ArrayList<Rectangle> arr, StringBuilder printString) {
         Scanner searchScan = new Scanner(next);
         searchScan.next(); // skips over the token that has the word search
         String name = searchScan.next();
@@ -305,11 +304,11 @@ public class Commands extends Rectangle1 {
 
         // prints the results of the search
         if (result == null) {
-            getPrintString().append("Rectangle not found: " + name + "\n");
+            printString.append("Rectangle not found: " + name + "\n");
             System.out.println("Rectangle not found: " + name);
         }
         else {
-            getPrintString()
+            printString
                     .append("Rectangle found: " + result.toString() + "\n");
             System.out.println("Rectangle found: " + result.toString());
         }
@@ -324,13 +323,13 @@ public class Commands extends Rectangle1 {
      *            the current line being processed
      */
     private static void processDump(String next, BST<Rectangle> tree,
-            ArrayList<Rectangle> arr) {
-        getPrintString().append("BST Dump:\n");
+            ArrayList<Rectangle> arr, StringBuilder printString) {
+        printString.append("BST Dump:\n");
         System.out.println("BST Dump:");
         tree.inorderIterator();
 
         if (tree.getRoot() == null) {
-            getPrintString().append(
+            printString.append(
                     "Node has depth 0, Value (" + tree.getRoot() + ")\n");
             System.out.println(
                     "Node has depth 0, Value (" + tree.getRoot() + ")");
@@ -339,7 +338,7 @@ public class Commands extends Rectangle1 {
             while (tree.hasNext()) {
                 Rectangle rect = tree.getStack().peek().element;
                 Rectangle rect2 = tree.next();
-                getPrintString().append(
+                printString.append(
                         "Node has depth " + tree.getDepth(rect, tree.getRoot())
                                 + ", Value " + rect2 + "\n");
                 System.out.println(
@@ -347,7 +346,7 @@ public class Commands extends Rectangle1 {
                                 + ", Value " + rect2);
             }
         }
-        getPrintString().append("BST size is: " + tree.getSize() + "\n");
+        printString.append("BST size is: " + tree.getSize() + "\n");
         System.out.println("BST size is: " + tree.getSize());
     }
 

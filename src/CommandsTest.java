@@ -17,6 +17,7 @@ public class CommandsTest extends TestCase {
     private Commands command;
     private BST<Rectangle> tree;
     private ArrayList<Rectangle> arr;
+    private StringBuilder printString;
 
     /**
      * This method sets up the other test methods
@@ -26,6 +27,7 @@ public class CommandsTest extends TestCase {
         command = new Commands();
         tree = new BST<Rectangle>();
         arr = new ArrayList<Rectangle>();
+        printString = new StringBuilder();
     }
 
     /**
@@ -34,7 +36,8 @@ public class CommandsTest extends TestCase {
     public void testInsertValid() {
         assertTrue(tree.isEmpty());
         assertTrue(arr.isEmpty());
-        command = new Commands("insert rectangle1 0 0 50 50", tree, arr);
+        command = new Commands("insert rectangle1 0 0 50 50", tree, arr,
+                printString);
         Rectangle rect = new Rectangle("rectangle1", 0, 0, 50, 50);
         assertFalse(tree.isEmpty());
         assertNotNull(tree.find(rect));
@@ -48,7 +51,8 @@ public class CommandsTest extends TestCase {
     public void testInsertInvalid() {
         assertTrue(tree.isEmpty());
         assertTrue(arr.isEmpty());
-        command = new Commands("insert rectangle1 50 50 0 0", tree, arr);
+        command = new Commands("insert rectangle1 50 50 0 0", tree, arr,
+                printString);
         assertTrue(tree.isEmpty());
         assertTrue(arr.isEmpty());
     }
@@ -61,13 +65,15 @@ public class CommandsTest extends TestCase {
         Rectangle rect2 = new Rectangle("rectangle2", 50, 50, 50, 50);
 
         // try to remove rectangle that's not in the tree yet
-        command = new Commands("remove 0 0 50 50", tree, arr);
+        command = new Commands("remove 0 0 50 50", tree, arr, printString);
         assertTrue(arr.isEmpty());
 
         // insert rectangles then remove one
-        command = new Commands("insert rectangle1 0 0 50 50", tree, arr);
-        command = new Commands("insert rectangle2 50 50 50 50", tree, arr);
-        command = new Commands("remove 0 0 50 50", tree, arr);
+        command = new Commands("insert rectangle1 0 0 50 50", tree, arr,
+                printString);
+        command = new Commands("insert rectangle2 50 50 50 50", tree, arr,
+                printString);
+        command = new Commands("remove 0 0 50 50", tree, arr, printString);
         assertNull(tree.find(rect));
         assertNotNull(tree.find(rect2));
 
@@ -82,15 +88,18 @@ public class CommandsTest extends TestCase {
         Rectangle rect2 = new Rectangle("rectangle2", 50, 50, 50, 50);
 
         // insert rectangles
-        command = new Commands("insert rectangle1 0 0 50 50", tree, arr);
-        command = new Commands("insert rectangle2 50 50 50 50", tree, arr);
+        command = new Commands("insert rectangle1 0 0 50 50", tree, arr,
+                printString);
+        command = new Commands("insert rectangle2 50 50 50 50", tree, arr,
+                printString);
 
         // remove invalid coordinates
-        command = new Commands("remove -50 0 50 50", tree, arr);
-        command = new Commands("remove 0 -50 100 50", tree, arr);
-        command = new Commands("remove 0 0 -50 50", tree, arr);
-        command = new Commands("remove 0 0 50 -50", tree, arr);
-        command = new Commands("remove -50 -50 -50 -50", tree, arr);
+        command = new Commands("remove -50 0 50 50", tree, arr, printString);
+        command = new Commands("remove 0 -50 100 50", tree, arr, printString);
+        command = new Commands("remove 0 0 -50 50", tree, arr, printString);
+        command = new Commands("remove 0 0 50 -50", tree, arr, printString);
+        command = new Commands("remove -50 -50 -50 -50", tree, arr,
+                printString);
 
         assertNotNull(tree.find(rect));
         assertNotNull(tree.find(rect2));
@@ -102,9 +111,11 @@ public class CommandsTest extends TestCase {
     public void testValidRemoveName() {
         Rectangle rect = new Rectangle("rectangle1", 0, 0, 50, 50);
         Rectangle rect2 = new Rectangle("rectangle2", 50, 50, 50, 50);
-        command = new Commands("insert rectangle1 0 0 50 50", tree, arr);
-        command = new Commands("insert rectangle2 50 50 50 50", tree, arr);
-        command = new Commands("remove rectangle1", tree, arr);
+        command = new Commands("insert rectangle1 0 0 50 50", tree, arr,
+                printString);
+        command = new Commands("insert rectangle2 50 50 50 50", tree, arr,
+                printString);
+        command = new Commands("remove rectangle1", tree, arr, printString);
         assertNull(tree.find(rect));
         assertNotNull(tree.find(rect2));
     }
@@ -116,9 +127,11 @@ public class CommandsTest extends TestCase {
     public void testInvalidRemoveName() {
         Rectangle rect = new Rectangle("rectangle1", 0, 0, 50, 50);
         Rectangle rect2 = new Rectangle("rectangle2", 50, 50, 50, 50);
-        command = new Commands("insert rectangle1 0 0 50 50", tree, arr);
-        command = new Commands("insert rectangle2 50 50 50 50", tree, arr);
-        command = new Commands("remove rectangle3", tree, arr);
+        command = new Commands("insert rectangle1 0 0 50 50", tree, arr,
+                printString);
+        command = new Commands("insert rectangle2 50 50 50 50", tree, arr,
+                printString);
+        command = new Commands("remove rectangle3", tree, arr, printString);
         assertNotNull(tree.find(rect));
         assertNotNull(tree.find(rect2));
     }
@@ -130,10 +143,14 @@ public class CommandsTest extends TestCase {
         Rectangle rect = new Rectangle("rectangle1", 0, 0, 50, 50);
         Rectangle rect2 = new Rectangle("rectangle2", 10, 10, 50, 50);
         Rectangle rect3 = new Rectangle("rectangle3", 0, 0, 50, 5);
-        command = new Commands("insert rectangle1 0 0 50 50", tree, arr);
-        command = new Commands("insert rectangle2 50 50 50 50", tree, arr);
-        command = new Commands("regionsearch 10 10 50 50", tree, arr);
-        command = new Commands("regionsearch 0 25 25 25", tree, arr);
+        command = new Commands("insert rectangle1 0 0 50 50", tree, arr,
+                printString);
+        command = new Commands("insert rectangle2 50 50 50 50", tree, arr,
+                printString);
+        command = new Commands("regionsearch 10 10 50 50", tree, arr,
+                printString);
+        command = new Commands("regionsearch 0 25 25 25", tree, arr,
+                printString);
         assertTrue(rect.intersect(rect2));
         assertTrue(rect.intersect(rect3));
         assertFalse(rect2.intersect(rect3));
@@ -145,10 +162,14 @@ public class CommandsTest extends TestCase {
     public void testInvalidRegionSearch() {
         Rectangle rect = new Rectangle("rectangle1", 0, 0, 50, 50);
         Rectangle rect2 = new Rectangle("rectangle2", 0, 0, -50, -50);
-        command = new Commands("insert rectangle1 0 0 50 50", tree, arr);
-        command = new Commands("insert rectangle2 50 50 50 50", tree, arr);
-        command = new Commands("regionsearch 0 0 -50 50", tree, arr);
-        command = new Commands("regionsearch 0 0 50 -50", tree, arr);
+        command = new Commands("insert rectangle1 0 0 50 50", tree, arr,
+                printString);
+        command = new Commands("insert rectangle2 50 50 50 50", tree, arr,
+                printString);
+        command = new Commands("regionsearch 0 0 -50 50", tree, arr,
+                printString);
+        command = new Commands("regionsearch 0 0 50 -50", tree, arr,
+                printString);
         assertFalse(rect.intersect(rect2));
     }
 
@@ -156,18 +177,23 @@ public class CommandsTest extends TestCase {
      * Tests that the intersections method works
      */
     public void testIntersections() {
-        command = new Commands("intersections", tree, arr);
+        command = new Commands("intersections", tree, arr, printString);
         Rectangle rect = new Rectangle("rectangle1", 0, 0, 50, 50);
         Rectangle rect2 = new Rectangle("rectangle2", 50, 50, 50, 50);
         Rectangle rect3 = new Rectangle("rectangle3", 100, 101, 102, 103);
         Rectangle rect4 = new Rectangle("rectangle4", 2, 2, 500, 500);
         Rectangle rect5 = new Rectangle("rectangle5", 1, 1, 450, 400);
-        command = new Commands("insert rectangle1 0 0 50 50", tree, arr);
-        command = new Commands("insert rectangle2 50 50 50 50", tree, arr);
-        command = new Commands("insert rectangle3 100 101 102 103", tree, arr);
-        command = new Commands("insert rectangle4 2 2 500 500", tree, arr);
-        command = new Commands("insert rectangle5 1 1 450 400", tree, arr);
-        command = new Commands("intersections", tree, arr);
+        command = new Commands("insert rectangle1 0 0 50 50", tree, arr,
+                printString);
+        command = new Commands("insert rectangle2 50 50 50 50", tree, arr,
+                printString);
+        command = new Commands("insert rectangle3 100 101 102 103", tree, arr,
+                printString);
+        command = new Commands("insert rectangle4 2 2 500 500", tree, arr,
+                printString);
+        command = new Commands("insert rectangle5 1 1 450 400", tree, arr,
+                printString);
+        command = new Commands("intersections", tree, arr, printString);
         assertFalse(rect.intersect(rect2));
         assertTrue(rect.intersect(rect5));
         assertTrue(rect.intersect(rect4));
@@ -183,10 +209,12 @@ public class CommandsTest extends TestCase {
      */
     public void testValidSearch() {
         Rectangle rect = new Rectangle("rectangle1", 0, 0, 50, 50);
-        command = new Commands("search rectangle1", tree, arr);
-        command = new Commands("insert rectangle1 0 0 50 50", tree, arr);
-        command = new Commands("insert rectangle2 50 50 50 50", tree, arr);
-        command = new Commands("search rectangle1", tree, arr);
+        command = new Commands("search rectangle1", tree, arr, printString);
+        command = new Commands("insert rectangle1 0 0 50 50", tree, arr,
+                printString);
+        command = new Commands("insert rectangle2 50 50 50 50", tree, arr,
+                printString);
+        command = new Commands("search rectangle1", tree, arr, printString);
         assertNotNull(tree.find(rect));
 
     }
@@ -196,9 +224,11 @@ public class CommandsTest extends TestCase {
      */
     public void testInvalidSearch() {
         Rectangle rect = new Rectangle("rectangle3", 50, 50, 100, 100);
-        command = new Commands("insert rectangle1 0 0 50 50", tree, arr);
-        command = new Commands("insert rectangle2 50 50 50 50", tree, arr);
-        command = new Commands("search rectangle3", tree, arr);
+        command = new Commands("insert rectangle1 0 0 50 50", tree, arr,
+                printString);
+        command = new Commands("insert rectangle2 50 50 50 50", tree, arr,
+                printString);
+        command = new Commands("search rectangle3", tree, arr, printString);
         assertNull(tree.find(rect));
     }
 
@@ -206,17 +236,19 @@ public class CommandsTest extends TestCase {
      * Tests that the dump method works
      */
     public void testDump() {
-        command = new Commands("dump", tree, arr);
+        command = new Commands("dump", tree, arr, printString);
         assertNull(tree.getRoot());
         Rectangle rect = new Rectangle("rectangle1", 50, 50, 100, 100);
-        command = new Commands("insert rectangle1 0 0 50 50", tree, arr);
-        command = new Commands("insert rectangle2 50 50 50 50", tree, arr);
-        command = new Commands("dump", tree, arr);
+        command = new Commands("insert rectangle1 0 0 50 50", tree, arr,
+                printString);
+        command = new Commands("insert rectangle2 50 50 50 50", tree, arr,
+                printString);
+        command = new Commands("dump", tree, arr, printString);
         assertEquals(0, tree.getDepth(rect, tree.getRoot()));
         assertEquals(2, tree.getSize());
 
         // test an invalid command
-        command = new Commands("dumb", tree, arr);
+        command = new Commands("dumb", tree, arr, printString);
     }
 
 }
