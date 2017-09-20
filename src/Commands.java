@@ -265,8 +265,8 @@ public class Commands extends Rectangle1 {
      */
     private static void processIntersections(String next, BST<Rectangle> tree,
             ArrayList<Rectangle> arr) {
-        printString.append("Intersection pairs: \n");
-        System.out.println("Intersection pairs: ");
+        printString.append("Intersection pairs:\n");
+        System.out.println("Intersection pairs:");
         tree.inorderIterator();
         while (tree.hasNext()) {
             Rectangle rect = tree.next();
@@ -274,7 +274,8 @@ public class Commands extends Rectangle1 {
             while (tree.hasNextInner()) {
                 Rectangle rectOuter = tree.nextInner();
                 if (rect.intersect(rectOuter)) {
-                    printString.append(rect.toString() + " : " + rectOuter.toString() + "\n");
+                    printString.append(rect.toString() + " : "
+                            + rectOuter.toString() + "\n");
                     System.out.println(
                             rect.toString() + " : " + rectOuter.toString());
                 }
@@ -320,7 +321,7 @@ public class Commands extends Rectangle1 {
      */
     private static void processDump(String next, BST<Rectangle> tree,
             ArrayList<Rectangle> arr) {
-        printString.append("BST Dump: \n");
+        printString.append("BST Dump:\n");
         System.out.println("BST Dump:");
         tree.inorderIterator();
 
@@ -334,14 +335,11 @@ public class Commands extends Rectangle1 {
             while (tree.hasNext()) {
                 Rectangle rect = tree.getStack().peek().element;
                 Rectangle rect2 = tree.next();
-                printString.append("Node has depth "
-                        + tree.getDepth(rect,
-                                tree.getRoot())
-                        + ", Value " + rect2 + "\n");
-                System.out
-                        .println("Node has depth "
-                                + tree.getDepth(rect,
-                                        tree.getRoot())
+                printString.append(
+                        "Node has depth " + tree.getDepth(rect, tree.getRoot())
+                                + ", Value " + rect2 + "\n");
+                System.out.println(
+                        "Node has depth " + tree.getDepth(rect, tree.getRoot())
                                 + ", Value " + rect2);
             }
         }

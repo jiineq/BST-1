@@ -14,6 +14,13 @@ import java.io.IOException;
 public class Output {
 
     /**
+     * Empty constructor
+     */
+    public Output() {
+        // left blank intentionally
+    }
+
+    /**
      * Constructor of the Output class. Takes the information parsed in
      * Rectangle1 class and writes output to a text file.
      * 
@@ -21,17 +28,18 @@ public class Output {
      *            the file to print to
      * @param str
      *            contains the data to print
+     * @throws IOException
      */
-    public Output(FileWriter outputFile, String str) {
+    public Output(FileWriter outputFile, String str) throws IOException {
 
-        try {
+//        try {
             outputFile.write(str);
             outputFile.close();
-        }
-        catch (IOException e) {
-            e.printStackTrace();
-        }
-
+//        }
+//        catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//
     }
 
 }
