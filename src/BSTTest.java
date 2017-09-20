@@ -51,9 +51,9 @@ public class BSTTest extends TestCase {
         assertFalse(emptyBST.isEmpty());
         assertFalse(emptyBST.contains("CArdi"));
         assertTrue(emptyBST.contains("beyonce"));
-        
+
     }
-    
+
     /**
      * tests that insert() works with duplicates
      */
@@ -62,7 +62,7 @@ public class BSTTest extends TestCase {
         assertFalse(emptyBST.contains("beyonce"));
         emptyBST.insert("beyonce");
         assertTrue(emptyBST.contains("beyonce"));
-        emptyBST.insert("beyonce"); //duplicate 1
+        emptyBST.insert("beyonce"); // duplicate 1
         emptyBST.insert("vance");
         emptyBST.insert("zhu");
         emptyBST.insert("xxx");
@@ -71,7 +71,7 @@ public class BSTTest extends TestCase {
         assertTrue(emptyBST.contains("vance"));
         emptyBST.remove("vance");
         assertTrue(emptyBST.contains("vance"));
-       
+
     }
 
     /**
@@ -81,56 +81,62 @@ public class BSTTest extends TestCase {
         // test on empty BST
         emptyBST.remove("root");
         assertNull(emptyBST.getRoot());
-        
+
         assertTrue(oneNode.contains("root"));
         assertFalse(oneNode.isEmpty());
     }
-    
+
+    /**
+     * tests that removing a root node works as intended
+     */
     public void testRemoveRoot() {
-        //populate BST
+        // populate BST
         oneNode.insert("root"); // dupe
         oneNode.insert("beyonce");
         oneNode.insert("cardi");
         oneNode.insert("adelle");
         oneNode.insert("dvsn");
         assertEquals(6, oneNode.getSize());
-        
-        //remove current root
+
+        // remove current root
         oneNode.remove("root");
         assertTrue(oneNode.contains("root"));
         assertEquals("root", oneNode.getRoot().element);
         assertFalse(oneNode.isEmpty());
         assertEquals(5, oneNode.getSize());
     }
-        
+
+    /**
+     * tests remove with two children
+     */
     public void testRemoveTwoChildren() {
-        //populate BST
+        // populate BST
         oneNode.insert("root"); // dupe
         oneNode.insert("beyonce");
         oneNode.insert("cardi");
         oneNode.insert("adelle");
         oneNode.insert("dvsn");
         assertEquals(6, oneNode.getSize());
-        
-        //remove item with two children
+
+        // remove item with two children
         oneNode.remove("beyonce");
         assertFalse(oneNode.contains("beyonce"));
         assertEquals("root", oneNode.getRoot().element);
         assertFalse(oneNode.isEmpty());
-        assertEquals(5, oneNode.getSize());        
+        assertEquals(5, oneNode.getSize());
     }
-    
+
     /**
      * tests that remove() works as intended
      */
     public void testRemoveRightChild() {
-        //populate BST
+        // populate BST
         oneNode.insert("beyonce");
         oneNode.insert("cardi");
         oneNode.insert("dvsn");
         assertEquals(4, oneNode.getSize());
-        
-        //remove item with one child
+
+        // remove item with one child
         assertEquals("beyonce", oneNode.getRoot().left.element);
         assertNull(oneNode.getRoot().left.left);
         assertEquals("cardi", oneNode.getRoot().left.right.element);
@@ -140,20 +146,20 @@ public class BSTTest extends TestCase {
         assertFalse(oneNode.contains("cardi"));
         assertEquals("root", oneNode.getRoot().element);
         assertFalse(oneNode.isEmpty());
-        assertEquals(3, oneNode.getSize());        
+        assertEquals(3, oneNode.getSize());
     }
-    
+
     /**
      * tests that remove() works as intended
      */
     public void testRemoveLeftChild() {
-        //populate BST
+        // populate BST
         oneNode.insert("beyonce");
         oneNode.insert("dvsn");
         oneNode.insert("cardi");
         assertEquals(4, oneNode.getSize());
-        
-        //remove item with one child
+
+        // remove item with one child
         assertEquals("beyonce", oneNode.getRoot().left.element);
         assertNull(oneNode.getRoot().left.left);
         assertEquals("dvsn", oneNode.getRoot().left.right.element);
@@ -163,7 +169,7 @@ public class BSTTest extends TestCase {
         assertFalse(oneNode.contains("dvsn"));
         assertEquals("root", oneNode.getRoot().element);
         assertFalse(oneNode.isEmpty());
-        assertEquals(3, oneNode.getSize());        
+        assertEquals(3, oneNode.getSize());
     }
 
     /**
@@ -173,7 +179,7 @@ public class BSTTest extends TestCase {
         assertNull(emptyBST.find("nothing"));
         assertNull(emptyBST.find(null));
     }
-    
+
     /**
      * tests that find() works as intended
      */
@@ -216,7 +222,7 @@ public class BSTTest extends TestCase {
         assertFalse(emptyBST.hasNext());
         assertNull(emptyBST.next());
     }
-    
+
     /**
      * tests the hasNext() and next() methods of iterator
      */
@@ -230,7 +236,7 @@ public class BSTTest extends TestCase {
         assertFalse(oneNode.hasNext());
         assertNull(oneNode.next());
     }
-    
+
     /**
      * tests the hasNext() and next() methods of iterator
      */
@@ -243,11 +249,11 @@ public class BSTTest extends TestCase {
         assertEquals("banana", threeNodes.getRoot().element);
         assertEquals("apple", threeNodes.getRoot().left.element);
         assertEquals("carrot", threeNodes.getRoot().right.element);
-        
+
         // generate stack
         threeNodes.inorderIterator();
         assertNotNull(threeNodes.getStack());
-        
+
         assertEquals(2, threeNodes.getStack().size());
         assertTrue(threeNodes.hasNext());
         assertEquals("apple", threeNodes.next());
@@ -277,7 +283,7 @@ public class BSTTest extends TestCase {
         assertFalse(emptyBST.hasNextInner());
         assertNull(emptyBST.nextInner());
     }
-    
+
     /**
      * tests the inner methods of iterator
      */
@@ -297,7 +303,7 @@ public class BSTTest extends TestCase {
         assertNull(oneNode.next());
         assertNull(oneNode.nextInner());
     }
-    
+
     /**
      * test the inner methods of iterator
      */

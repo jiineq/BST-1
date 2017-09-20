@@ -40,7 +40,7 @@ import java.util.Scanner;
 
 public class Rectangle1 {
 
-    public static StringBuilder printString; // the data to print
+    private static StringBuilder printString; // the data to print
     private static BST<Rectangle> tree;
     private static ArrayList<Rectangle> rectangleList;
     @SuppressWarnings("unused")
@@ -79,15 +79,16 @@ public class Rectangle1 {
                     Commands commands = new Commands(scan.next(), tree,
                             rectangleList);
                 }
-
+                
                 // create and write to the output file
-                outputTextFile = new Output(outputFile, printString.toString());
+                outputTextFile = new Output(outputFile,
+                        getPrintString().toString());
 
                 scan.close();
             }
             catch (FileNotFoundException e) {
                 e.printStackTrace();
-                printString.append("The file was not found.");
+                getPrintString().append("The file was not found.");
                 System.err.println("The file was not found.");
             }
             // catch (IOException e) {
@@ -100,6 +101,25 @@ public class Rectangle1 {
             System.err.println("Check arguments");
         }
 
+    }
+
+    /**
+     * Getter for printString
+     * 
+     * @return the printString variable
+     */
+    public static StringBuilder getPrintString() {
+        return printString;
+    }
+
+    /**
+     * Setter for printString
+     * 
+     * @param printString
+     *            the printString variable
+     */
+    public static void setPrintString(StringBuilder printString) {
+        Rectangle1.printString = printString;
     }
 
 }

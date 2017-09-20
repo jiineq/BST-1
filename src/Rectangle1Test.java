@@ -18,14 +18,13 @@ import student.TestCase;
  */
 public class Rectangle1Test extends TestCase {
 
-    @SuppressWarnings("unused")
-    private Rectangle1 rect;
     private String[] args;
-    private final ByteArrayOutputStream errContent = new ByteArrayOutputStream();
+    private ByteArrayOutputStream errContent;
 
     @Override
     public void setUp() throws Exception {
-        rect = new Rectangle1();
+        new Rectangle1();
+        errContent = new ByteArrayOutputStream();
         args = new String[1];
         System.setErr(new PrintStream(errContent));
     }
@@ -139,9 +138,8 @@ public class Rectangle1Test extends TestCase {
         assertEquals(
                 "(rectangle2, 50, 50, 50, 50) : (rectangle5, 1, 1, 450, 400)",
                 scan.nextLine());
-        assertEquals(
-                "(rectangle3, 100, 101, 102, 103) : (rectangle5, 1, 1, 450, 400)",
-                scan.nextLine());
+        assertEquals("(rectangle3, 100, 101, 102, 103) : "
+                + "(rectangle5, 1, 1, 450, 400)", scan.nextLine());
 
         assertFalse(scan.hasNext());
         scan.close();

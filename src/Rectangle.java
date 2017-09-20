@@ -73,7 +73,7 @@ public class Rectangle implements Comparable<Rectangle> {
     }
     
     /**
-     * helper method that checks that the rectangle doesnt leave the bounds
+     * helper method that checks that the rectangle doesn't leave the bounds
      * @return true if x + w and y + h are less than bounds
      */
     private boolean validRange() {

@@ -118,17 +118,24 @@ public class RectangleTest extends TestCase {
      */
     public void testIsValidFalse() {
         // x is < 0
-        assertFalse(new Rectangle("", -1, 0, 5, 5).isValid());
+        Rectangle rect = new Rectangle("", -1, 0, 5, 5);
+        Rectangle rect2 = new Rectangle("", 0, -1, 5, 5);
+        Rectangle rect3 = new Rectangle("", 0, 0, 0, 5);
+        Rectangle rect4 = new Rectangle("", 0, 0, 5, 0);
+        Rectangle rect5 = new Rectangle("", 1000, 0, 25, 5);
+        Rectangle rect6 = new Rectangle("", 0, 1000, 5, 25);
+
+        assertFalse(rect.isValid());
         // y is < 0
-        assertFalse(new Rectangle("", 0, -1, 5, 5).isValid());
+        assertFalse(rect2.isValid());
         // w is <= 0
-        assertFalse(new Rectangle("", 0, 0, 0, 5).isValid());
+        assertFalse(rect3.isValid());
         // h is <= 0
-        assertFalse(new Rectangle("", 0, 0, 5, 0).isValid());
+        assertFalse(rect4.isValid());
         // x + w > 1024
-        assertFalse(new Rectangle("", 1000, 0, 25, 5).isValid());
+        assertFalse(rect5.isValid());
         // y + h > 1024
-        assertFalse(new Rectangle("", 0, 1000, 5, 25).isValid());
+        assertFalse(rect6.isValid());
     }
 
 }
