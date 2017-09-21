@@ -159,8 +159,6 @@ public class Commands extends Rectangle1 {
             else { // remove the rectangle if it is in the tree
                 tree.remove(result);
                 arr.remove(result);
-                // System.out.println("Rectangle removed: " +
-                // result.toString());
             }
 
         }
@@ -179,8 +177,6 @@ public class Commands extends Rectangle1 {
             else { // remove the rectangle if it is in the tree
                 tree.remove(result);
                 arr.remove(result);
-                // System.out.println("Rectangle removed: " +
-                // result.toString());
             }
 
         }
