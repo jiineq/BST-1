@@ -32,14 +32,8 @@ public class Output {
      */
     public Output(FileWriter outputFile, String str) throws IOException {
 
-        // try {
         outputFile.write(str);
         outputFile.close();
-        // }
-        // catch (IOException e) {
-        // e.printStackTrace();
-        // }
-        //
     }
 
 }

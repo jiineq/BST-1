@@ -160,7 +160,6 @@ public class Commands extends Rectangle1 {
                 tree.remove(result);
                 arr.remove(result);
             }
-
         }
         else { // remove by name
             Rectangle result = null;
