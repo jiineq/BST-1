@@ -168,7 +168,7 @@ public class Rectangle implements Comparable<Rectangle> {
         if (other == null) {
             return false;
         }
-
+        
         double xMax1 = this.getX() + this.getWidth();
         double xMax2 = other.getX() + other.getWidth();
         double yMax1 = this.getY() + this.getHeight();
