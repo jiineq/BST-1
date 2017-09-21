@@ -76,9 +76,9 @@ public class Rectangle1Test extends TestCase {
                 scan.nextLine());
         assertEquals("Rectangle accepted: (rectangle1, 3, 3, 50, 50)",
                 scan.nextLine());
-        assertEquals("Rectangle rejected: (99, 90, 95, 94)", scan.nextLine());
+        assertEquals("Rectangle rejected (99, 90, 95, 94)", scan.nextLine());
 
-        assertEquals("BST Dump:", scan.nextLine());
+        assertEquals("BST dump:", scan.nextLine());
         assertEquals("Node has depth 1, Value (rectangle1, 0, 0, 50, 50)",
                 scan.nextLine());
         assertEquals("Node has depth 3, Value (rectangle1, 3, 3, 50, 50)",
@@ -95,7 +95,7 @@ public class Rectangle1Test extends TestCase {
                 scan.nextLine());
         assertEquals("BST size is: 7", scan.nextLine());
 
-        assertEquals("BST Dump:", scan.nextLine());
+        assertEquals("BST dump:", scan.nextLine());
         assertEquals("Node has depth 1, Value (rectangle1, 0, 0, 50, 50)",
                 scan.nextLine());
         assertEquals("Node has depth 3, Value (rectangle1, 3, 3, 50, 50)",
@@ -112,6 +112,8 @@ public class Rectangle1Test extends TestCase {
 
         assertEquals("Rectangle found: (rectangle1, 0, 0, 50, 50)",
                 scan.nextLine());
+        assertEquals("Rectangle found: (rectangle1, 3, 3, 50, 50)",
+                scan.nextLine());
         assertEquals("Rectangle found: (rectangle2, 50, 50, 50, 50)",
                 scan.nextLine());
         assertEquals("Rectangles intersecting region (10, 10, 50, 50):",
@@ -120,10 +122,10 @@ public class Rectangle1Test extends TestCase {
         assertEquals("(rectangle1, 0, 0, 50, 50)", scan.nextLine());
         assertEquals("(rectangle2, 50, 50, 50, 50)", scan.nextLine());
         assertEquals("(rectangle1, 3, 3, 50, 50)", scan.nextLine());
-        assertEquals("Rectangle rejected: (10, 10, 0, 50)", scan.nextLine());
-        assertEquals("Rectangle rejected: (10, 10, 50, 0)", scan.nextLine());
-        assertEquals("Rectangle rejected: (10, 10, 0, 0)", scan.nextLine());
-        assertEquals("Intersection pairs:", scan.nextLine());
+        assertEquals("Rectangle rejected (10, 10, 0, 50)", scan.nextLine());
+        assertEquals("Rectangle rejected (10, 10, 50, 0)", scan.nextLine());
+        assertEquals("Rectangle rejected (10, 10, 0, 0)", scan.nextLine());
+        assertEquals("Intersections pairs:", scan.nextLine());
         assertEquals(
                 "(rectangle1, 0, 0, 50, 50) : (rectangle5, 1, 1, 450, 400)",
                 scan.nextLine());

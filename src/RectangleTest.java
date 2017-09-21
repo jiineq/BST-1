@@ -124,6 +124,13 @@ public class RectangleTest extends TestCase {
         Rectangle rect4 = new Rectangle("", 0, 0, 5, 0);
         Rectangle rect5 = new Rectangle("", 1000, 0, 25, 5);
         Rectangle rect6 = new Rectangle("", 0, 1000, 5, 25);
+        Rectangle rect7 = new Rectangle("1rectangle", 0, 0, 50, 50);
+        Rectangle rect8 = new Rectangle("r1", -1, 0, 50, 50);
+        Rectangle rect9 = new Rectangle("r1", 0, 0, 0, 50);
+        Rectangle rect10 = new Rectangle("r1", 0, 0, 1025, 0);
+        Rectangle rect12 = new Rectangle("b", -1, -1, 50, 50);
+        Rectangle rect13 = new Rectangle("c", 0, 0, 1025, 1025);
+        Rectangle rect14 = new Rectangle("d", 0, 0, -1, -1);
 
         assertFalse(rect1.isValid());
         // y is < 0
@@ -136,6 +143,14 @@ public class RectangleTest extends TestCase {
         assertFalse(rect5.isValid());
         // y + h > 1024
         assertFalse(rect6.isValid());
+        // digit in name
+        assertFalse(rect7.isValid());
+        assertFalse(rect8.isValid());
+        assertFalse(rect9.isValid());
+        assertFalse(rect10.isValid());
+        assertFalse(rect12.isValid());
+        assertFalse(rect13.isValid());
+        assertFalse(rect14.isValid());
     }
 
 }

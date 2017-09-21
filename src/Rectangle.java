@@ -61,27 +61,46 @@ public class Rectangle implements Comparable<Rectangle> {
      * @return true if the Rectangle is valid, false otherwise
      */
     public boolean isValid() {
-        return (validCoordinates() && validRange() && validDimensions());
+        return (validName() && validCoordinates() && validRange()
+                && validDimensions());
     }
-    
+
+    /**
+     * Checks to see if the name is valid. The name is invalid if it begins with
+     * a digit.
+     * 
+     * @return true if the name is Valid, false otherwise
+     */
+    private boolean validName() {
+        if (!name.equals("")) {
+            char first = name.charAt(0);
+            return !Character.isDigit(first);
+        }
+        return false;
+
+    }
+
     /**
      * helper method that checks x and y coordinates
+     * 
      * @return true if x and y are both greater than 0
      */
     private boolean validCoordinates() {
         return (x >= 0 && y >= 0);
     }
-    
+
     /**
      * helper method that checks that the rectangle doesn't leave the bounds
+     * 
      * @return true if x + w and y + h are less than bounds
      */
     private boolean validRange() {
-        return ((x +  w <= 1024) && (y + h <= 1024));
+        return ((x + w <= 1024) && (y + h <= 1024));
     }
-    
+
     /**
      * helper method that checks that the rectangle has real dimension
+     * 
      * @return true if w and h are both greater than 0
      */
     private boolean validDimensions() {
